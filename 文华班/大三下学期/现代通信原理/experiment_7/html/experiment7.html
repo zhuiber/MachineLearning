@@ -1,0 +1,278 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>experiment7</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-05-08"><meta name="DC.source" content="experiment7.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clear;
+clc;
+
+<span class="comment">% Generate a random 0/1 sequence (10 digits)</span>
+L = 10;
+bits = round(rand(1,L));
+<span class="comment">% Transform it to a bipolar symbol sequence (Tb=0.001)</span>
+bits(bits==0) = -1;
+Tb = 0.001;
+N_sample = 100;
+dt = Tb / N_sample;
+t = 0:dt:(L * N_sample - 1)*dt;
+bipolar_wave = [];
+<span class="keyword">for</span> i=1:L <span class="comment">% For each symbol</span>
+    <span class="keyword">if</span> bits(i) == 1 <span class="comment">% If symbol is 1, turn to corresponding waveform</span>
+        bipolar_wave = [bipolar_wave, ones(1, N_sample)];
+    <span class="keyword">else</span> <span class="comment">% If symbol is 0, turn to 0</span>
+        bipolar_wave = [bipolar_wave, -ones(1, N_sample)];
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Pass through roll-off system</span>
+Fs = 1e5;
+Rs = 0.25e4;
+span = 6;
+alpha = 0.5;
+sps = Fs/Rs;
+h = rcosdesign(alpha, span, sps);
+bits_sample = upsample(bits,sps);
+rs1 = conv(bits_sample, h, <span class="string">'same'</span>);
+
+<span class="comment">% Plot the generated symbol sequence</span>
+figure(1)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(311)
+plot(t, bipolar_wave)
+ylim([-2, 2])
+grid <span class="string">on</span>;
+title(<span class="string">"The original bipolar waveform"</span>);
+xlabel(<span class="string">"time (s)"</span>)
+ylabel(<span class="string">"voltage (V)"</span>)
+
+<span class="comment">% Plot the received signal</span>
+subplot(312)
+plot((1:length(rs1)), rs1)
+grid <span class="string">on</span>;
+title(<span class="string">"The original bipolar waveform without noise"</span>);
+xlabel(<span class="string">"time (s)"</span>)
+ylabel(<span class="string">"voltage (V)"</span>)
+
+<span class="comment">% Add noise to the symbol sequence as received signal</span>
+noise_intense = 0.1;
+rs1_noise = rs1 + randn(1, length(rs1))*noise_intense;
+
+<span class="comment">% Plot the received signal added noise</span>
+subplot(313)
+plot((1:length(rs1_noise)), rs1_noise)
+grid <span class="string">on</span>;
+title(<span class="string">"The original bipolar waveform added noise"</span>);
+xlabel(<span class="string">"time (s)"</span>)
+ylabel(<span class="string">"voltage (V)"</span>)
+
+<span class="comment">% Match filter the received signal</span>
+rs1_noise_match = conv(rs1_noise, h, <span class="string">'same'</span>);
+rs1_noise_match_sample = downsample(rs1_noise_match, sps);
+
+<span class="comment">% Plot the original signal</span>
+figure(2)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(311)
+stem(rs1_noise_match_sample)
+ylim([-2, 2])
+grid <span class="string">on</span>;
+title(<span class="string">"The sequence of filtered bipolar waveform"</span>);
+xlabel(<span class="string">"time (s)"</span>)
+ylabel(<span class="string">"voltage (V)"</span>)
+
+<span class="comment">% Plot the filtered signal</span>
+subplot(312)
+plot((1:length(rs1_noise_match)), rs1_noise_match)
+grid <span class="string">on</span>;
+title(<span class="string">"The filtered signal waveform"</span>);
+xlabel(<span class="string">"time (s)"</span>)
+ylabel(<span class="string">"voltage (V)"</span>)
+
+<span class="comment">%  Decide on the signal</span>
+output_wave = [];
+Vd = 0;
+<span class="keyword">for</span> i=1:length(rs1_noise_match_sample)
+    <span class="keyword">if</span> rs1_noise_match_sample(i) &gt;= Vd
+        output_wave = [output_wave, ones(1, N_sample)];
+    <span class="keyword">else</span>
+        output_wave = [output_wave, -ones(1, N_sample)];
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+subplot(313)
+plot(t,output_wave)
+ylim([-2, 2])
+grid <span class="string">on</span>;
+title(<span class="string">"The receive bipolar waveform"</span>);
+xlabel(<span class="string">"time (s)"</span>)
+ylabel(<span class="string">"voltage (V)"</span>)
+</pre><img vspace="5" hspace="5" src="experiment7_01.png" alt=""> <img vspace="5" hspace="5" src="experiment7_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear;
+clc;
+
+% Generate a random 0/1 sequence (10 digits) 
+L = 10;
+bits = round(rand(1,L));
+% Transform it to a bipolar symbol sequence (Tb=0.001)
+bits(bits==0) = -1;
+Tb = 0.001;
+N_sample = 100; 
+dt = Tb / N_sample; 
+t = 0:dt:(L * N_sample - 1)*dt; 
+bipolar_wave = []; 
+for i=1:L % For each symbol
+    if bits(i) == 1 % If symbol is 1, turn to corresponding waveform
+        bipolar_wave = [bipolar_wave, ones(1, N_sample)];
+    else % If symbol is 0, turn to 0
+        bipolar_wave = [bipolar_wave, -ones(1, N_sample)];
+    end
+end
+
+% Pass through roll-off system
+Fs = 1e5;
+Rs = 0.25e4;
+span = 6;
+alpha = 0.5;
+sps = Fs/Rs;
+h = rcosdesign(alpha, span, sps); 
+bits_sample = upsample(bits,sps);
+rs1 = conv(bits_sample, h, 'same');
+
+% Plot the generated symbol sequence
+figure(1)
+set(gcf,'position', [250 200 1000 800]);
+subplot(311)
+plot(t, bipolar_wave)
+ylim([-2, 2])
+grid on;
+title("The original bipolar waveform");
+xlabel("time (s)")
+ylabel("voltage (V)")
+
+% Plot the received signal
+subplot(312)
+plot((1:length(rs1)), rs1)
+grid on;
+title("The original bipolar waveform without noise");
+xlabel("time (s)")
+ylabel("voltage (V)")
+
+% Add noise to the symbol sequence as received signal
+noise_intense = 0.1;
+rs1_noise = rs1 + randn(1, length(rs1))*noise_intense;
+
+% Plot the received signal added noise
+subplot(313)
+plot((1:length(rs1_noise)), rs1_noise)
+grid on;
+title("The original bipolar waveform added noise");
+xlabel("time (s)")
+ylabel("voltage (V)")
+
+% Match filter the received signal
+rs1_noise_match = conv(rs1_noise, h, 'same');
+rs1_noise_match_sample = downsample(rs1_noise_match, sps);
+
+% Plot the original signal
+figure(2)
+set(gcf,'position', [250 200 1000 800]);
+subplot(311)
+stem(rs1_noise_match_sample)
+ylim([-2, 2])
+grid on;
+title("The sequence of filtered bipolar waveform");
+xlabel("time (s)")
+ylabel("voltage (V)")
+
+% Plot the filtered signal
+subplot(312)
+plot((1:length(rs1_noise_match)), rs1_noise_match)
+grid on;
+title("The filtered signal waveform");
+xlabel("time (s)")
+ylabel("voltage (V)")
+
+%  Decide on the signal
+output_wave = [];
+Vd = 0;
+for i=1:length(rs1_noise_match_sample) 
+    if rs1_noise_match_sample(i) >= Vd
+        output_wave = [output_wave, ones(1, N_sample)];
+    else 
+        output_wave = [output_wave, -ones(1, N_sample)];
+    end
+end
+subplot(313)
+plot(t,output_wave)
+ylim([-2, 2])
+grid on;
+title("The receive bipolar waveform");
+xlabel("time (s)")
+ylabel("voltage (V)")
+
+##### SOURCE END #####
+--></body></html>

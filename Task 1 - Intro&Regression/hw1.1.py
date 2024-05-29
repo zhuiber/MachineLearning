@@ -1,77 +1,50 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, KFold
 
-# Load Boston House Dataset from CSV
-data = pd.read_csv("boston.csv")
+# Step 1: Data Preprocessing
+data = pd.read_csv("2022300013卫宏林/boston.csv")
+X = data.drop(columns=["MEDV"]).values
+y = data["MEDV"].values
 
-# Check for missing values
-missing_values = data.isnull().sum()
-print("Missing Values:\n", missing_values)
+# Add a column of ones to the feature matrix for the intercept term
+X = np.c_[np.ones(X.shape[0]), X]
 
-
-# Define the Linear Regression class
-class LinearRegressionCustom:
-    def __init__(self, learning_rate=0.01, n_iterations=1000):
-        self.learning_rate = learning_rate
-        self.n_iterations = n_iterations
-        self.weights = None
-        self.bias = None
-
-    def fit(self, X, y):
-        # Initialize weights and bias
-        self.weights = np.zeros(X.shape[1])
-        self.bias = 0
-
-        # Gradient Descent
-        for _ in range(self.n_iterations):
-            # Calculate predictions
-            predictions = self.predict(X)
-
-            # Compute gradients
-            d_weights = -(2 / X.shape[0]) * np.dot(X.T, (y - predictions))
-            d_bias = -(2 / X.shape[0]) * np.sum(y - predictions)
-
-            # Update weights and bias
-            self.weights -= self.learning_rate * d_weights
-            self.bias -= self.learning_rate * d_bias
-
-    def predict(self, X):
-        return np.dot(X, self.weights) + self.bias
-
-
-# Split the data into features (X) and target variable (y)
-X = data.drop('MEDV', axis=1)
-y = data['MEDV']
-
-# Split the data into training and testing sets
+# Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
-# Linear Regression Model
-lr_model = LinearRegressionCustom(learning_rate=0.01, n_iterations=1000)
-X_train_bias = np.c_[np.ones(X_train.shape[0]), X_train]  # Add a column of ones for the bias term
-lr_model.fit(X_train_bias, y_train)
+# Step 2: Model Training
+def train_linear_regression(X_train, y_train):
+    # Calculate the coefficients using the least squares method
+    coefficients = np.linalg.inv(X_train.T @ X_train) @ X_train.T @ y_train
+    return coefficients
 
-# Predictions on the test set
-X_test_bias = np.c_[np.ones(X_test.shape[0]), X_test]  # Add a column of ones for the bias term
-y_pred_lr = lr_model.predict(X_test_bias)
+coefficients = train_linear_regression(X_train, y_train)
 
-# Mean Squared Error for Linear Regression
-mse_lr = np.mean((y_test - y_pred_lr) ** 2)
+# Step 3: Model Evaluation
+def cross_validation_mse(X, y, k=10):
+    kf = KFold(n_splits=k)
+    mse_values = []
+    for train_index, val_index in kf.split(X):
+        X_train_fold, X_val_fold = X[train_index], X[val_index]
+        y_train_fold, y_val_fold = y[train_index], y[val_index]
+        # Train the model on the training fold
+        coefficients_fold = train_linear_regression(X_train_fold, y_train_fold)
+        # Make predictions on the validation fold
+        y_pred_fold = X_val_fold @ coefficients_fold
+        # Calculate MSE for the fold
+        mse_fold = np.mean((y_pred_fold - y_val_fold) ** 2)
+        mse_values.append(mse_fold)
+    return np.mean(mse_values)
 
-# Scatter plot between the original and predicted house prices
-plt.figure(figsize=(12, 6))
-plt.scatter(y_test, y_pred_lr)
-plt.title('Linear Regression: Original vs Predicted Prices')
-plt.xlabel('Original Prices')
-plt.ylabel('Predicted Prices')
-plt.show()
+average_mse = cross_validation_mse(X_train, y_train)
 
-# Experimental Report
-print("\nExperimental Report:")
-print("1. Linear Regression Model:")
-print("   - Model Coefficients:", lr_model.weights)
-print("   - Bias Term:", lr_model.bias)
-print("   - Mean Squared Error on Testing Set:", mse_lr)
+# Step 4: Prediction
+y_pred_test = X_test @ coefficients
+
+# Step 5: Performance Evaluation
+mse_test = np.mean((y_pred_test - y_test) ** 2)
+
+print("Coefficients:", coefficients)
+print("Average MSE on training set (10-fold cross-validation):", average_mse)
+print("MSE on testing set:", mse_test)
