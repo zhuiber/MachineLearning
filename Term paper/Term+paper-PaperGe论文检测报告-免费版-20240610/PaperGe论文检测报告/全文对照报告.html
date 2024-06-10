@@ -1,0 +1,1131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>全文对照报告</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="toTop" content="true">
+    <link href="css/index_2018051810.css" type="text/css" rel="stylesheet"/>
+    <script src="js/jquery1.42.min.js" type="text/javascript"></script>
+    <script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+    <script src="js/esl.js" type="text/javascript"></script>
+        <script src="js/toTop.js" type="text/javascript"></script>
+    <!--解决IE 6不支持png格式的代码-->
+    <!--[if IE 6]>-->
+    <script src="js/png.js" type="text/javascript"></script>
+    <script>
+        DD_belatedPNG.fix('.pngfix');
+
+        function ShowCharts1() {
+            var pieData = [];
+            pieData[0] = {
+                value: 14660,
+                name: '原创'
+            };
+            pieData[1] = {
+                value: 263,
+                name: '重复'
+            };
+            // 路径配置
+            require.config({
+                paths: {
+                    'echarts': 'https://staticxin.paperyy.com/static/js/echarts-map',
+                    'echarts/chart/pie': 'https://staticxin.paperyy.com/static/js/echarts-map'
+                }
+            });
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/pie'
+                ],
+                function (ec) {
+                    var myChart = ec.init(document.getElementById('cnt_1_echart'));
+                    var option = {
+                        legend: {
+                            orient: 'vertical',
+                            x: 210,
+                            y: 10,
+                            data: ['原创', '重复']
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            //formatter: "{a} <br/>{b} : {c} ({d}%)",
+                            formatter: function (a) {
+                                return a[0] + " <br/>" + a[1] + " : " + a[2] + " (" + a[3] + "%)";
+                            }
+                        },
+                        calculable: false, //拖动
+                        grid: {x: 0, y: 0, x2: 0, y2: 10, borderWidth: 0},
+                        series: [
+                            {
+                                name: '字数',
+                                type: 'pie',
+                                radius: '45',
+                                startAngle: 137,
+                                center: ['39%', '45%'],
+                                data: pieData
+                            }
+                        ]
+                    };
+                    myChart.setOption(option);
+                }
+            );
+        }
+
+        //正则表达式，获取地址中的参数
+        var reg = new RegExp("(^|&)data=([^&]*)(&|$)", "i");
+
+        function getQueryString() {
+            var search = location.search;
+            var param = search.substr(1).match(reg);
+            if (param == null) return;
+            var encode = param[2];
+            var decode = decodeURIComponent(encode);
+            var data = JSON.parse(decode);
+            var urlMap = data.UrlMap;
+            $(".repTabLink_0426 a").each(function () {
+                var key = $(this).attr("href");
+                if(urlMap[key]){
+                    var url;
+                    if(urlMap[key].indexOf("?") > -1){
+                        url =  urlMap[key] + "&data=" + encode;
+                    }else{
+                        url = urlMap[key] + "?data=" + encode;
+                    }
+                    $(this).attr("href", url);
+                }
+            });
+            $("#navigation").show();
+        }
+
+        $(document).ready(function () {
+            getQueryString();
+            ShowCharts1();
+        });
+    </script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e4b45d63c5a5325ea504b3d728ea4f01";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+	<script type="text/javascript">
+		$(function(){
+			if($('#text_0').length != 0){
+				$('#text_0 em').eq(0).prepend('<div class="text_tip">鼠标靠近红色文字，可查看分句相似情况<img class="text_tip_close" src="images/tip_Close.png" ></div>')
+			}
+
+			$(".text_tip,.text_tip_close").click(function(){
+				$('.text_tip').fadeOut()
+			})
+		})
+	</script>
+     <style>
+        .hd{
+            position:relative;
+        }
+        .autoJC_fire{
+            position: absolute;
+            width: 12px;
+            height: 16px;
+            top: -8px;
+            right: 408px;
+        }
+        .autoJC_ing,.autoJC_no{
+            text-align: center;
+            padding-top: 40px;
+        }
+        .autoJC_ing img{
+            width: 28px;
+            height: 28px;
+            margin-bottom: 10px;
+        }
+        .autoJC_p1{
+            font-size: 16px;
+            color: #999999;
+        }
+        .autoJC_ing a,.autoJC_no a{
+            color: #3E8BDB;
+            font-size: 14px;
+            margin-bottom: 65px;
+        }
+        .autoJC_p2{
+            font-size: 14px;
+            color: #888888;
+            background: #EFF6FC;
+            height: 30px;
+            line-height: 30px;
+            margin-top:40px;
+        }
+        .autoJC_p2 a{
+            color:#3E8BDB;
+            margin-right: 20px;
+            text-decoration: underline;
+            padding-left:10px;
+        }
+        .autoJC_p3{
+            font-size: 14px;
+            color: #333333;
+            margin-top: 10px;
+        }
+        .autoJC_no img{
+            width: 32px;
+            height: 32px;
+        }
+        .autoJC_p4{
+            font-size: 16px;
+            color: #333333;
+            margin: 10px 0 5px;
+        }
+        .autoJC_aft,.autoJC_no{
+            display:none;
+        }
+		.similar {
+		  font-style: normal;
+		  cursor: default;
+		}
+		.highlight2 {
+		  color: blue !important;
+		}
+		.text_tip{
+			width: 282px;
+			height: 47px;
+			color: #fff;
+			background:url(images/tip_Icon.png) no-repeat center center;
+			padding-top: 10px;
+			padding-left: 20px;
+			cursor: pointer;
+			position: absolute;
+			top: -53px;
+			left: -36px;
+			z-index: 1000;
+		}
+		.text_tip .text_tip_close{
+			margin-left: 33px;
+			cursor: pointer;
+			margin-top: -3px;
+		}
+		.detail_tableText tr td.Origin_text #text_0 em{
+			position: relative;
+		}
+
+        /**
+        * 非至尊版报告检测报告结果样式
+        *
+        */
+
+        .ReportResult_Con1_new {
+            width: 100%;
+            height: 40px;
+        }
+
+        .ReportResult_Con1_new ul li{
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .ReportResult_Con1_new ul li:nth-child(1){
+            font-weight: 800;
+        }
+
+        .ReportResult_Con1_new ul li:nth-child(3){
+            margin-right: 40px;
+        }
+
+        .color-red {
+            color: #ef001c
+        }
+
+		.restore-report {
+			position: absolute;
+			right: 50px;
+			top: 44px;
+			font-size: 20px;
+			border: 1px solid #fff;
+			padding: 0 5px;
+		}
+		.restore-report a {
+			color: #fff;
+		}
+        .repTabLink_0426 li {
+            width: 192px;
+            margin-right: 0px;
+        }
+    </style>
+</head>
+<body>
+<!--底部弹框-->
+        <div class="new-guangg">
+            <img src="images/close_gray.png" class="new-close"/>
+            <img src="images/new-head.png" class="new-headbg"/>
+            <p class="new-head">第3代智能语义降重模型</p>
+            <p class="new-secHead">进一步优化修改后的语句通顺度、连贯性、上下文结构。较上一代提升30%</p>
+            <a class="new-a" href="javascript:void(0);" onClick="goJC('advert_reduce')">立即体验</a>
+            <p class="new-lastText">最高可降低75%比例</p>
+        </div>
+        <script>
+            $(function(){
+                var error_word=Math.floor(Math.random()*(100+1-0)+0);
+                $("#error_word").html(error_word + "个");
+                $(".nb-close").click(function(){
+                    $(".new-btbox").hide()
+                })
+                $(".new-close").click(function(){
+                    $(".new-guangg").hide()
+                })
+            })
+            function goJC(e){
+                var newWindow = window.open();
+                try{
+                    $.ajax({
+                        url:'http://www.paperge.com/api/user-behavior/user-behavior-collect/3/12',
+                        async:true,
+                        data:{pageInfo:e}
+                    })
+                }
+                catch(err){
+
+                }
+                newWindow.location.href='http://www.paperge.com/check-pay/reduce-pay-task/G202406101146088830'
+            }
+        </script>
+<!--topbg-->
+<a name="top"></a>
+<div class="topbg">
+    <div class="top">
+        <div class="logo pngfix">
+                <img src="images/logo_-1.png">（全文对照报告）
+        </div>
+    </div>
+</div>
+<!--topbg end-->
+<!--wrapper-->
+<div class="wrapper">
+    <!--wrapper_topbg-->
+    <div class="wrapper_topbg">
+        <!--xp 20150305 begin-->
+        <div class="type1" style="font-size: 13px;height: 14px;line-height: 41px;"></div>
+        <!--xp 20150305 end-->
+        <!--wrapper_con-->
+        <div class="wrapper_con">
+            <div class="wrapper_conT"></div>
+            <div class="wrapper_con_content">
+                <!--TextInfo-->
+                <div class="TextInfo Mar">
+                    <div class="navbar">
+                        <ul class="fastBar">
+                        </ul>
+                    </div>
+                    <!--TextInfoCon-->
+                    <div class="TextInfoCon">
+                        <div class="TextTitle" style="width:129px;">文献基本信息</div>
+                        <!--TextInfoContent-->
+                        <div class="TextInfoContent">
+                            <div class="TextInfoContent_left">
+                                <ul>
+                                    <li><span class="lbt">检测文献：</span>Term paper</li>
+                                    <li><span class="lbt">文献作者：</span></li>
+                                    <li><span class="lbt">报告时间：</span>2024-06-10 11:46:11</li>
+                                    <li><span class="lbt">段落个数：</span>3</li>
+                                    <li><span class="lbt">报告编号：</span>G202406101146088830</li>
+                                </ul>
+                            </div>
+                            <div class="division_line"></div>
+                            <div class="TextInfoContent_right">
+                                <ul>
+                                    <li class="title">检测范围：</li>
+                                    <li>中国期刊库</li>
+                                    <li>中国图书库</li>
+                                    <li>硕士论文库</li>
+                                    <li>博士论文库</li>
+                                    <li>会议论文库</li>
+                                    <li>报纸库</li>
+                                    <li>中国专利库</li>
+                                    <li>中国标准库</li>
+                                    <li>百科库</li>
+                                    <li>网页库</li>
+                                    <li>中国共享库</li>
+                                    <li>自建库</li>
+                                    <li>工作总结</li>
+                                    <li>思想汇报</li>
+                                    <li>项目申报书</li>
+                                </ul>
+                            </div>
+                            <div class="seal">
+                                <div id="SealArea">
+                                    <div id="SealBg">
+                                        <img width="125" height="125" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAIAAAAA4vtyAABo9ElEQVR42sx9B5xcVdn+mb6zfXdm+24SEhJCDU1AEKQIIkWKBT4FRRQFQVRAEBQExQb6/8ACKggqVSAJKdtnZ2an7WzPpvfetszM7f3e83/fO2FZdpMQ+fT7ffO7xmWzmb3znPc87/Oc8573EvE//BIk+09BgD9lWYYvOI6DryUF/sfyQlYUM7LEwnc4XuF5kzUkLcvxsjJBTTUn03FBFhWZF0T4IZ7jBF7AtxAVSdUljc9y+0WFNSxRNSRBVnVFsERWzUoKvqcg5iSZlVX4twL8ak1RFUmmqkplTRUUXlU5Q+dVmVOEnMpqggCXKsKvk+AF9wf/jBWlmZ9ImvLKf7TJ17HDQv53cM/fbv7O4AtAgWXhM6oInyxpEi8LOVHIyQoMCmfwEivLBxWZlTRB0bOaxikKK4uiquimAS9N0wzL1KglmNo4NRlF0xTTsqhiGYwqAXimqSuaCr/FfnMYb1EylKwp7ZGzanZM4XMAMZVUSzFgUEWWg5FWBD5/SYKYxx0uGP7/BOj/G7jzPEQpB3epKO9/Bo5h4SMJospzMlz44eEnRUaQGUtBVCcU6aAiCpapU6paGjVUQJXCJbLm+Kh5cB+dOEhz45SbsMbGKc9TllP3j2kHxk1OopplGBavW6xucobJ6gaEtgSTQVZgRBU+I+kCb8g4dTicd4KmSZouiTxewiFwYXrloT8UPe8hOxX0qd8/9K/+7+D+flBIGPs4AJJsz+UxSc7ZMWZwKmU1Cn8KBoUXfGaBajpV5W1bmVCUW75CW7L8wFtv7H3ppc2/emrdgz/ecN8j6+57aPX9D63+4SMHvv8T5a+v7nz2uci9D218/mV6YD81ZWbfHgh80dJlSiWKLKQKOowAZfQMn4N5o1gWYxg5XWdVnVFhKigwOaYCl7/byck6E/ep8T75/f9DuEMEIa3nP4MsQfjzMK8lOSuNMkqGlXmIKU3UjZxijTJ0/8T4pg17Y3Fl7za6b+uBnz2dPPPS+LxFqfoFkdknRurmh4oautzVYVew1Vmxwl3RWl6/vLh66KwLOo87+UVvZfQz1/FvvjL+xquJe7+fvv07W37xW2blSm3LRovPmJYKcE/AzINZIxoarwuywZtUUFQpwxhZSAkyxjgMuX2fk3BPJZM8Q07DfeYk+L/B7xyfn7acJMLFA/6CaKraGNV5S9M5Xt+yXeqMHPjjnzfc9+DQbV9PfPqmrtMvW/e1b4/+5Ik1536qjRS3Ov0dxNtOCrodxUlS3EeKB0hJLykZLqrb1nRSat6CRN3sNmfpClLUM2fhlosu7zvp7LdIScRREiuuS805pf+Cy1d/9Zubfvnr0eVLtZF+Y3QcyB3py7QUSMRAQDmG5pD3OEnm3gtzG0bBTknC1KCeivsk0P8XcYfQBuiBTFkYAkmExEgtClRLFZXu3iuu7Nj745+NXHld7LgT2vylzcTT4ilbTjztJXXxeScnixtjpCzlCgw4gu0F5dGiYKwwGPMGY65A1B3oLZm1rv7kfedctqrhpG5fVcxblS6o6XFVxGzQu4grRgrijsJuR2nYWdHprUnULlx32ic3PvyTfa+9om5ZQ9kJqkjU0HVVo6aF8kZRGAmklYDBAfIIhRTmp6kMPhNi6YOv/0O4szkG4l0xQPipJogQjt+8dv2WP/yp/577Ws664N3CYIgUJIk/6SyIOrwxQvrd/m6nv434Q65AyFMTcdf1u2anSLDXWZN21sUddTFnQ8TR0E7q4IqULeipOrmv/IQeb0OvtybpCcZdpQPeQEewOj3ruMH6OamiaoA+SkrCpBSuxaRoaWVT7KrPrfv9H0ZHhvlMhhnPSTmJN3RWU0FHMQJvq1UOoZeESdyPhG/+P+X3Xv8p3GeOan4acuKEKnIoeiXQBiiQWSbLyAxMZ1YwJcagOKnHmDWD+/76t75v39P/+ZtDJ54VKWzoLWgYqV04MveMeHB+u7ch6YCYrev1NCTddQlXLVzwRdINgM6Kuxq7HfVwAe7wNfwJXy93Fq90l7Z6KkLeQNRXFffXxH21cXd1tOqEkQXnrVlwfqxsfhep7XHU97sbUo6qdhfpcjjDbhjXguSi0zfd+uUN//WlTffcxQ4PQhpQqZ7T5Zwgg9YCPgfQIQnlxAOMPp6jAmRgmQOhKmdlDv5qUsNMHZhjlJXk36VYOI6B1CQrWo5lOD6raiJYkqyioZ2hQC7S3g09q3//VOLSq6JnXjz65FOU2b3lN79qnn1SByld33jC+uNPT5fM7XPOjpMqgD7lrIU/E6Qa/7TRj7pq4Io7a+A7aUdtv6NugNQNktoEqU+SBrhSjsYe56wezxy4Uu7ZUX9DMjAvFVgQ9TfF8F9VJZ2BmKsy6a3t99YOuKpTpKzDWbzCX7zc41/m96885/ytv3xS2bxKNwQNyEcyQOCOQuiDezIU0LhWNkdZAbzbKMdCVsin2TzQU7nofxV35BPVGudBdMsHpJym81QVLMsSKNWpObFz9XjLm8Pf+Er33AXNxLGsJCg+/itL3Lv7T89HFp4bd1atCcztKWsIkYpeR0OK1MGVdNQB6Hnc81ensxKuLmcg4gJ+r4J/BVfCVd3jxdkAX8A3o+6qbndtt7cuXtAAWSHuDkIagJ9PuIJJdxWAHnaXpdyNQFbAWvDNmLMs4ijq8hZ1EW+L1/+myxc+5/zMn5+n47tkqjHUkGRjVKNZ0RRYRWBYkc3qsqCqaoZ9P9/y9mtS7fxn+V2a8VJkIyMrIIp5QTJVhWoSNTV54qAQTay/5a6BptO6PBVhhw9IvMVTFD9pUeSa66KnfTxReNygo7HXWddFSiOuipSv2sa95tDlrM1fgPsQwaufVKcd1T3O6pSzOo91nJRD7oU/k6Qy5QgkSRAu+IF+R0WvKxgnFRFSAT/c56tNeqvgHtLuSoC721nRXlAZ89eki5u6SupTvro0Kel2FrYRx1JPQey6qzKdy+nePUzPOlZSBV7nZDNrGECjei5nsKJsUOGDr0m185/ld3nGixc5uC1klQmRmuB+NHGoZ/D++5fXnr7l7Ou3LvhktLCmzVeW8AcHXRU9xJtyliZJaQ8p782TgLumz18fI+WTYQ5g9biA6/ELuNLOQI+jMkkq8HJWQjgn3HglPY0JdwP82eObk/DO7nY1Rhz1cKVJRRrC3FEVI0EYwj74GXcNxD58HwYpVVgXKq4JOSq7SXmEVK4idatIVbcvGCmGUfRFSVF8waL+a28evOlbO1/6h7J9G2j/XJYH0WNICphtMByyrKIFREMr5y+IeEH4j+mZmYgr9gssvihzigmG3rQmxsb+uTj2mRv/TopXfup6OtIv/+PlvoZTukhZm6e2x1uzxlGaBrntLI6RopCjsMNd3lVQEy9oipH6uDMAV8xROflFN6mAK+IpB5YIu0pBnMRJadJRBgSdJmUg6iOkMEwKQTtGnaUxd3nCW5kqCKac5aBtEh4Y0bpeVz3kVRjObpgrZHbU2ZgKLOyffwbo/e7y2qintI8UprwNIUcQHFnaV9vjrmonxcsd/uWeonea5q2+7wFhoE/hGR60u4xLDqge3kN8Ev1/D+7SEV7yEV4AumGZlqly64Y3/+TH4eNP+QdEzbmXcuO7qLx/zWMPg4JOk2B3QX2HpzbkqetyVQAo8CHhz7CnqtNd3eWsgrAFFgYSiDrK4YqQsjApzqPZRsraSXmHO9DprQoV1oZLG8JljZHyps6iolBhYZe3IOz2xWw9mib+XlDu7qKIuwiGCnR9r6cOmCdBMDEkSEPE1ZCsP2nd+ZeOfumW7ddc2109K+yvhDeHpJ0iDd2kPuqpjxVUd3vLol5/i6Pgn+6i+I2fn+juEMQMBL6oahlFsNWOaIuaQ9DncT9GIf8v436kF4gWzaIHUoO9N321y+kPE7LijEU0GqYyXX3fY8uL6ztICURi1FERczSm3acA1mFS1UOaBsi8fjJnwDHL5pBSCFvAOuQ4dHU5i2K+8lRRcOjCa0Yuv3Hd527ddPudm++7f9tPHt3+9M93PPPrTffdvfm7d23+xjfWff7mwYuvTJx0Tkvg+MXeWhCL7Q5Xm8Pb6SyEwO/1VsOf4Ll6SHHCXdYdaOyZd0ru9juzt3wr7J3T7TwuRipBvPY6mnoIcH1jj6M2TSpHSGDAX9blKlheVJm85nOjy5tZnhnXFVA1AHcedzvG5fwwcJzwL+A+GcWHDe08jUz+AC+ZgmWKCqsxOcoZNAeCUeCoRCfGMy/9ffDM88D4xAlp8ZX23vBlK9W790cPvVoWWEy8ibJa4A1Ikh2kqqugLuaelXShoE6BjHFVAi1AegR+7yQQpBXdhY09s09fc/nndj342MTf/pFraxbWb9+/dRvdl5VZETy+qpiQRcDuc5QKpqFNmLyi754YPxjtHXs3vf/Ftzfc/kDPJ69uDzZA4PcgZfsg6w54Grsc5Ul/LTjYkLN8MDh3pHZBT0F9nATA5UK26PYAF0Emr8fsTSCjlA+4yxK+oojTC9Ou56zLDr7ypqWKE7oEZlYXdMi6jKGIEivwOUNRjQn5GC0rmYrysfCJpptgiCQVqVzgFVDmVJOZjWu3/uCHnaed+7a3ZKWvKOTyxwqrkyd8DD55urx2JSkC5dDrhk9SBroC0mAfaeogRd2+ykRBNQxGlAS7vI3xxtMHz75i/Rfv2HHPwwd/+4fskqXcQL+8b5cucbqp4NICNXlDprpOdYuFz23oVAHFygO/jVlUoJqmiuD7LaqL8m7gN3Pzej0R2f/KX2Nf/9rSxgUrSQlwVx+pTJDydlLY5i7r8ge7QGtC1vXMgTsEZQlYgy6KOYJovny13SQAFjflqhj0V4EQApbrOuOiLb9/nk4cFMfHZA6IxRAZiYqyovJjfNaQ9SPxwXTcp0b6tGw5cyTwmxJnsqwpg2eTxjUZsiiX7k1/63vLS0vAAXYAHXuq+30NaUewy1HW5ipeQ3z9jhKQdH0kAN+ElIXGx9mQdntSjoIuUthCqtubzkxd+5Utv3qGa21X9+yzslkYS50CxhTCWtYo6FJVxq0PSGCyqVJDBUmhKihYxymVWNG0FMHUIOL2bdyxIxSV9u4Ed4wrL5qiCiwdGzX7+3b99unITZ9vb1oYqmzqcgH0vk5I0YX1Pb5ZCVIHwj9MKhIOEKM4MDAJEmVz2v1Nva7GFAHWqmx3l0RIQYj4uxecveOhx+imjbrEZ3RLzKk0B6TBjOksLj4fgaWn4z4V38PiPvlG+W+qPE8Vw8jh+q5CdX7VwKqv3rGkoLqTkJSvdNhbO0xAw9X3ECSQiLe01x8Eb5IkxeASwUNC8kwAj3vKo8QZdxSDn1x19S17XvwHu3UT0CbMHXBbJrV0AxcLRdUQFJ0TtRwni2OMwglgXsCj6xqumJusyPEiq+pUVCneqcVs3aJpmiXxoiEACWiWqXBcdtVGZvVmCBT4LxBaQkfb2gd+GDrp3C5vLQjKhKOixxnsc9WmbEOb9lTDvARGSnlqIwX1yzxV3QQosSnsrgt7gOtBGhS3En+osmHdvfdxfemsKuYgLiTNEDhBFeGej9WvHgn3yXkwFXfkGdliGUXgVQrqZdvGkbu+3VYYSBDvKlcw5a0CigSrAq4y4WuANBUl1dHCuhWu0rC7EmxOxItmMoFOx99SdXzftV/Y8cfnmKEBk2PA2GpUF6gM4Mr2HiqINghh0cIt0CxkEFEHvEE2wGjgApamSpouWqZuyKasw5dbX/gzqJe9S5bIEth8U1E0SQdWFBU+B7FimtTQYGpYCgVKEuTOruFb72irWQBE30vKwTSlPVUDntoBsGmkOuZEx5soqEt6q2Pwn566qK8u5mvERSEHeIuyBClo9lSu+vqduYE+WeFx6nG8kuEh1Rzjnt8ReeZIPMXINMsBxVI6um/bI492VtR3EdeQvzztmg0WvNsZBFgHXNVxb32nuz5JZkW81V0k2OedBSIaZHiIlEWCx6++9Jrtf3+d6+u3+JyOcKusKMCtm4Kc310TUBqLCvh0SbF4mTK4dm/KqqGZnGJvv8kCFTjJ4hXVZPbt6L/tTnAGkfrjdi9dYpomfgDgIFUAxoeBAbZRcIeWz5jcPsUYN00gMTq6P/Pa6+lrb2wpbwQSh3wecwXirlrM9u5ZoCkhyfc4AzASMEG7SHnUCRJzdo9zzqqiprQbJH/R0tLqvjvvEtYP5ahwQJNEQVVz8jR3eUSeOVJePdIroxu4GTc2seO/fxeee2oXKej1wKysTvrnht0NUVfNsKN2BDynq7aroCFGauPuQD8JDjprAfFmb1X09PM3PfYzOrIaCYFSUJ+CJgmKvSEFWKsG4Gqxhy74GlIkoK9g9NqrQJqhCVLO4GnuQPicz3KpdmEg0T33nE5S0/3ZL9PRnLR3Y9+Nt4ibh3VRBKGhoLCWJU2FJCxbEgOMpSiMouV0nQHoLY3u3LH76WeXnHlhS1FwsaNkmaM05q8b8jfZgQ9zNBh1o4MDUz3gbEyS+hRITN8scCG9vspm4n6nPLjpsUe18b08NXEKKkeM4H9BRx72xVLNtNR9ry/pOv3iFlKCe0C4cDh70NEY8tWHvI09ziZQLKATgHAGwYI7qgacpSHiedfrH7ziWmH5Cl3OSrhsRpG+OVzpBpXCmnpW1XnFUoG8ASZNnfayQDuYCnwhGYqpsUPfeXAlqW71Vq9wFyVO+/iqJx5o8dTteuvdcO1c4N8tL70maoA2DBovQ7bVNUjDpmLAtywxK7FZTlIzBh0zKHAPBdW9eiRz023phWc2e8pDzjJcfnBWggToddf2F9UC20AYdZMqkAxhf23EUQ+eI+Kr6PdXRom3++Rzxt5YQhlJZnlJZI9UdnCYeJ85LPAFzmv4YdBKhsILOONVWWMhQC3+wJuvdJ/z8Q6HH5nOU9PjaugnjSFS1e4qB7fZ46rBGyXlvSQAAzDgRu3c3nDiyA8eEdavNajCGkJOy98HuD0+v502eaHzlTFOVVWeevGGrql2cQuVDXAM29eFSmtXuutW3/pNcWLP1t88vZJUdoLmu+wzTM8wC8lCUuFTaDqFzKwC+JAnTHsXRlVgevFYsgOpkAWvA+ysWiBClYnu/k1f/1Fb3cmQYMOksHfhqZ3esm6CKxOrfDWg6BPuprQDxE9VyBtI+gJr/U1dxPe6t2Do7Iv3JddyCsDOKDkGkpXKaSpyJM9KOQX3r9TD8/vMeIckJuZyEHzjEgccqolYkUItlelsTX7286GCYI+rLOQuD4EeL5zdSaqG3PXAg7gl5JoFRrynoLbfV9UKMpkUR045e9uTv5A3rjGAcEFky3Yd0vvG+BDWdpWBAIjnr2m44740pE89B/e555m/tZUFO4PzudHdnGaMr1nTf/lnm0lpizew9tmnIR+AjgF8FVMWVN4AGWOYIL+oJMPvRq7HnKwi+iIH/pMVJU7WABtLUfQNGw48/1zyrIuX15yQe/jhLZ+5qqugAuQmyLN+RwNkqbS7vtdZlyTBCIHsGkwVNjR7CqIOf89/3c6tGwYdCePMSNJ+kXsvzCFGeFmUjob7B166wTAMyIXRHCQLvGEQedLQcOr665cUVKZIweqC2pCjErglXjynwwGIV/U5AsOeJsil3aQB1Bio3faC0tbzr9z+3J/1zF4QnfCeFsg5cLzcBxYkbIWKWB820vOXidU2fG772sglnwIiHrr0urW3fq3DW7bp0Z9Gq2eHTr9gX3tbODCvlZQeHEgb43uzKkthLDVWVHJUw1QMzA4jB2+laDIqEEwquHQOYpThFWB7kDowOBKzO7eyZceLr4y+9dq7Jy6KkqK0qwoSVchZk/DXx9243biGoKgfdFYnnI1tbl+KOCL+gm0P3a9nMkAQEsceAPXL4+qsDnQhyYLIHFHPTMedFcEZqaYFbwRoqODJD+7uu+uBt30FrW5fX0H5EDCMoz7hbLJddbCNlPW4gz2OyhipgNgfIOUrScHgBRftenelPjEqUnNcFkF9arzG8yIE43RbcOglH+kSLH5fONICPstTtPXXzwKB7O6MNpPClcS/6u77qSJufurpaEVt99yzNz/1e8je8sRBE8MaF+wkE6umqKSDmQKRYydbWzdJ+TIN+D+N0dQxiZswOJZy1DDAHBxo7wydfWmr098LicpVB4yadkEmqwCHFfM0RPxzYs6SPlLX4wu2OIuaCelZcDL76jvALRybAUJT4WOCp9ZMsG6sxB1ez0zNrod0OiuxmgwxYvGqbhpgavb/5cV36k/oII50UVncWwwTDfRWkjTCdOt3BmMFs1cV14eJt8tb1En8bc7S/iuuVpe+A5MEhDlwHww/FmypMrCqDrw3xQNPSZ/ykS8dSK//0qvAZ67+/g93vvjXVMWcFU6wkVUDD/5g8PLrWkn56u/8YPcLL4cr57Q4Ckab2wVNkUAwajrkZENXsWpEATeF80lWbTaTsbwH17N4BexYVuWzYhZuD5U+KK2DB8YWv5m+8GLIWz2kBEwTOCwgHAC91V3T4z0u6nSDdogtPDN1460tZ5/zBnFFr7lO27CGFcaBW4BTIeQ1Q8XCP1k94nrkNAEEswPnoMDDvKeg9lKp6DmXLXMUD7jLRlxlSVLY6als9+K+ftJdF/FU9rnqhxyVnSVlg5+6aMWiU1d+4qKxt96kVATpApGlsYLB4wdlcLuY1Zjs1EU3wBtoFz29zb+HxV1TdEhO8gQXOu4M8CzK9pHwaZcL43tjZ1zUSlwdFdW7X/rjxu889LqvLnr6omXOCiYS42QeIkbix3L9/ZBNIamAnQKRk6ca/I0wABJuyXOspOayOKuwaBNg0mVIDlSXaE5Z8nb3xZe/6yxqId6EJ5h21CZBHLtAFleFC/0hR2Hqk5fRVJ8Qi0cuuOIFR9G6ux6k/HhO5CFnwDtBggHcVW4G7jMr0PKIwLDj+heYWWpaY+Nb7nt8OamEcAYlPkAqk57KUGFtmwd5Ju1r7PRUpEhZlPh7LrxQb1l6YOWy8ZXtNJsbpwZn4BKpyAIIAkxx+ILjGPhQynuvPNaTcE/9euol6iw1eMacOJhKgFpfUd1Ed24Do5odTPecdPn+pSsjx53eWla267//uPVHv4EIndi0RjSz48sWhy78VPLcaw07u6gap+bztmaPtCrmQx6iC22nKEJiZDURUq6sW4CdSiVwdTvffCP0ycuXk+I+Z9kIGsPKbl8jWhZfxRpSMlw+e9fPnjCFnLx//fLLrw7PvkBuD3H8OINTShPzuyKMcEy4Yw2pDJOPE3WZp+pEd7pt4SURUj4EGpzMCruqV/grm70B4JkRx3G9pAYCodPjXu4qSH/tdsrl0M1KOFWzimbIyKcZVRxDXadQXgMVzZkfYJWZuM+EHuSVyFsQv2B/tv36T62O8vQXbsS4Pbhn1ffvXkYq244/U9y+EYTi4LVf6jpuLjMwNPTlezoKqpcTR3fFAknmdEFXdM5+NxXVDkxkmASgZUS7Mg9yAKREUbNMXc0xwESgvXQZQt/Smez23z/fNe/UpLNwxFE64KjqctWvcBaDFU85y5udnr+X+Hf84DdUY6yhoc2Lrhv++n38vq2AHiMqpgK2WsRyxJl5dapfzQ8A3BTHTkAs4NqrLG/5/qMhkINOf7SwZpg0gJLtcle2egJhB7q4PlILvi5E/G+efe6BRAxYKWdSuF2QjLwKv1IGMFFLGQqrsCBxrXyMGzC3KQSXYXCynKMKfsLc5nW9N35x/b3fARRgrqnoS0X42gQ+1gWwrzAeuoojlzj30+8S397FryfP+OS7Dm+7M9hKfJHjT+k997NdgcYVjpKQs6TFUdl64sc3PPU7dd9e8How7aaN5bS1KXSbyhQ9bYtAxjAyVLLG92371X+3zz45RFyD/poBx6yQu7jHUQ72qsMf6CBFLZUNm3/4XfW1F3Ys/ET/vDMPLn2V0UAoUVmyQL8D2xx+XWymfs9ILJgLDNx0/+AVn4+Q0iQpBreWIrid319QF/PWROwt425vzUp3GXiNdd+/n+bGDJPmJCMnqzmWsdMXvnhFyOEQiNQwdVzwgkDNYs20LuYk0Hn2ohUnrn7i8WWkDOQgt2YESxh53rQo6ClezyqmykgCj16O1yzKx8Id/oaOBWePt3VtX7FYObhl999fS15/czjQuMxX2X/tl0ce/8V4IqKDLTXBwOBtSMg0h8d9ct9YUqZAkRffkjoBM8WQ1A3rRu79/hJ3SZSUwEQfcARXOWtSriA4lR5vDTiVWFFTT/XCtpKqdlKy7hvfPLh+AASVimXeCiPIh8F9+rDb95Ex1JwFETix+ZHHVlTWx4DaHDWAdbejOuKs7iVVcXd1b8ks+K2R2jnd80/sctZs+PUvqQIEauYEDW4Xl+hspWwosi6KpqroNnvAGHDgaCwwk6Yp4OfPbNkkUFbC8wRK+pLrm0nFwDfukKQsnt/ArQxwqJIho+HkLYbqCuhiiKS1t9wJOnLvS3+D+ADOEGTjQNu7KPsuukFRQTcpuCVDKcw3TVRB1dirY9JM3PMGZ2rYTeKOKVHVWVDAIP1BXKwZSF99A9wegNDuw8K0bmcwTQIDntqopzpGKsHQrCwsiRFffNb8jX94Wpb2wqcAd20J5uHXCaYyTP6AQA7uFu57ZDh50aVvERJzVa62d78gujvduDHfXdbUV3t8vKim5/gTRz728c7GM9e/+AIYBDBYLHxMRae8bPMMoo8m1cSlFQg64Bn4K5iGFnwwQ2NGd7TXLkw2LNz46JP6/j3ivnXRqoUtxLcnsgLPdqjoPhTZAOwsHe6VhbcC2uEtTR4ZWlYYjM05mTK8RenoQLq1en6oeq62YYtm6IIm6Rxv8gL8dtnEjUGKmCtTQH//gwtTN6QnXzbuwE7wl1SkoE8sqvGLl3af+vEuEgQQEq5qEPUpe8e8q6AOLmD8qKc84SlcSkjimqtHNw3AbxdAmoKi/eDC5Adwn5xueCuKDjM089cXk3Pnd7kKsMINC+Sqk6Qi7Kvrrz9lzakfT9bMCZHC3pp5g/NOH/7iXdyqYSB38CCCaiALczyEtmkoIGCQl+HCpXEVC090GRyZaAiaIGV37thw133LSme3O6uXu0tSt39j/ztvgemPnX2pIog6tcD+gRrB+SFzlmIA7ehgChTQWVL0tAvaSfneZOxgOLKyZm6E+Pe8+Be8fwMNqaZLIBxlQ0R6NURIMPCvpoAuzqylnrakhSlXYIAwwcvyWUGmFhDp7p/+orN8TtreLwR+j/mBaetizrqIGyuuRhxlXU5/s688cur52//0Dx7LRY2cMr1Wm8zc38i/qGWOxqOpK6+JeEuHCrGqpMtbG3UHhp0VHY6Kjlknrz3vsjWzT+rzBpP++sTs08dfftuC0KAWM85BgODyt13HDBe1DCQZiD4UcWBWAX1Z379r85/+QjUdSFzZskHavWXrD59cWTZn9W13gt5IXn8bWNOdf3sJWAIShiSC9JTA6oJGUnD68BwyELf1J79u8Zck7/nmztdf6zn/2pH7HgGvD1qFAtq6zTCSTGUcct4AJQrIv78gkTerh92Wm+ofYVJmJB7XcASeNYC7dH14oOfqL8ScFXEP+NiKbmdFGK07lk/Fcb/e27XgZPGJp/b95ner7n54eHUPkKvGKEfb95gMefjkNDvee/c9b3lLOklBv7umt7Ax4q8Gf5Qg/ncdpW+dcGr6nIv7qucmfYEV7qq+a26iO/eppjHKi1IOixqAwSUd3DIoKRWoBi6wISxgQnXK8qv/saSFFLUWNSjS2Pqf/KolOC/b1Y6bc6OjwsQuBYhk7cZOX2V30wLwyZxm4KEnlPAysA3GhCxaFCaSvKsrspL4+6+83mJHgRctUREFw959EmF4gJNlyCAmrgjDVLNAGdmTOb/waa+GfmCZ6PD+kcMlQnCznIweG5yYLvF7X/5HqLQ2QgqGQAU4yyNu3DFOEiy4TBJ37PrrKbdbndi0+Qvf3Pa75w2BPUDNw/vVD1TCqKppmlxfX/Mp5ywjjr6i+iipjvnqseDfWdHu9PaeeMbeBx8avf2uVk/F28S9ouEE+fXXwAqJuj4xzloqsLeUkXPgAFB3yxKkR1XHTWcVPQQPDkY9cKCzqg5E9+jIyOaHf9ruKe+97iuAJmeB3odpIbG61vuVb8DE2vnyKyaACeZe1/DYE2Ra3MJT7XV1md+0dccjP9384hsg5IFSqMoqlgDjbZsDyASCLgsgZiCjmKoG88Ded+anXIcpbJ62ZMLJOrgqBak3Y3GSrgPV0+zQ8MD1n406yhOOspC30q4zBKqpSLlLAKXuky7Y8+c/7frD/2udd9bmu3+kjx6Y+buIyEtqVsooQiY3RnElByQG0IImPPSj1wtLITVvcFWCYIoSrP+PuIJRQjZ/81vAdmNDgx1nX9hC3KnrPkfHMzyV6QRLR1lQQRlVlhgOogyCVDIAfTCqqgUikKp46AOoWZG2PvrzZlfZ9j/9Cfg3deGnWr3le557CVW/ofO7tklGlt9xsAUM8LnngCfAfTmINQPmEF4wjYCyBAo0Ik66rRkWV7UlwlQeh8nI/uv1oMqUI2TI+Liyrks7X34hETg1Tkrj/iDW7DvnpJ11aeKLkbLBkuPjYJ7rTogVz+9cdH6uY6Vh72fAC4DA3XpJA78qabwm6ion5GAmwjd1w1L37Fv1qU+/7S5Ku0rWu3CXLulq6HbUJhyVYU9hz/kXb3vuD/teeTX39G/V5/9woGUZK3EcVoxZGUs4qLIGK1NQTgAwiDcBl0FYQ0CvD65QNyC1AlOP7drYQQrDs88APSNv3xAKLOwubprYth4mxO4nnkpf/yWJYXov+PRi4uiomr+isGzohi/sfuGPzKYREDKWasJbMTpvn2yVpvreya/RriF/CpM8LgjczPXYY6gHVadQsWKTMPoApjc2fNWXO921wDOAeK9zdspTD9ayB0V2Hai+Dm9lNwl0Fjft/umT6uadvDi53y0LokzwHCkuoHCsxECMiJpJde1gc8fyyuBKh6/PXQHB3kPqejx4IqCHBPocgW5PsK12ztK5Jw19625l3RqZ5xAFEVhQGde1DLV0EJKyrmtgizgsE9AkyWCQZ0UNlCHwI2/hekjiYxe8SzyJqz9vcOzuZStXuLzRyz4NOXP9d7+33FnCWdymhx9tL6xb/5Vvxy+4cElB8QpncOi7D+lCFsQ4ReYQNZ3Pi5OpawzvxbgyuaX1XrR+FNylQ1YK016+KBXNINhscXzbc39pm31GiJT1Omv6nLMSvqYOb5m9s189Ujpr/awFq2vmgsla/ZkbuI74+1usMi7NErBSoMyAv1Qdgh33fCmb3fLkUyuIK+wpwvISV13UriGJENzeHSG1I6Rq0FXWTBypG74k7diHqzGCNmbqqkWBifks7j4DLLrCiwqrcEC4Ah6RtkwFHY6YXxaHfLD6u/d1+YIrSeHuZ/+kSfzA529tJ/5NP3widdU1sRMWiVTa/NgTnaRS6OwDKSqsWNZ++c2jb75LaX65CUkcEukH1izteLdlMG8X64ozeJz/14+y5MWlgKsIsmof4pZAH4NAGF+/JnndrUC/GI6kvtvb0O6vjjurOj3B/orGDQtOG15wKi6uzD5h9M//wAPhqgyCEpfeZBFxh5CHFIUL9mDodVPbsjH1mRs6He54QUXYWdHtru/ELV3Irnb2cAQxn/hKOnwlW+9/CEI1I+NZCAhs0OmQFQFQ9EcGELWc7R/Z+ezzsslD1uPYHDUhwaI1A+MDSXL14z99lxR2l9R2Vx43nk7pB7Ph405p8QVDNbNWXX4zYD142x1LiDPb1a3bhTRAg7I9ligtUIEaMDtnLLlI72mVD+CeJsGPjHt+uy4PPdaY4O61AMYCJty2nz+bqDulm5SmHcGIE+ucQfu1u8rDpKyncE6iakGE+FoLSnY8+KiSY7DKRhJzIg8jRwAkSPS8lMsxY8DRELxsuGt51ayww5fwB0EhgSnoclSCMUt66rtdjXF/TcKLJQwrqpsyL/8Vog/IHTkXlC6wFC45ixY4dFnY+8ar7YHjmotn82uHcYsTlwE48DLI96oiWuaWH/1ipb9x3Y9+tKywMnrmRaZk7Qu3rnRXgOkY+c7Dis5EZ5/R6qsUDuxgdU62Zwm8CUa6pWH9Fw9yUp+E+8i4I+gfGXfp0NIKb+/9Kvm5BtBraN8oszI08LErwqQEj5G4quKuerCvES9m2jSZHffMjpGC5R7fulu/pe8fpyrcrQq4Q8gTYCrAA/cVRQbeTTHM0VdeC/nKgZhwNcZdC26411U54Ar0eRsjzllRR8WwJ9BGCvsvu84aGgKJogosOCYIYazSAndGDW505/r7Hml2V7c6StrdgdBVN9KJg2B34NbBwoAAhLsGWamsXbv5xb/uGRnecs/9EVK28bFfUZnrveHLy0nx9h8/PRZraSHV8dMvBY2IdkUDw4VLyhj7WBsDokKmWCv0fqRPMUT/NtxB4eH74dlbXPNB042bRzL4WMBd27Bl3Re/hmeUnSUJT1WPozbsqMEdQXdtyjE7SmpjxPOu2z14xU0HN22leMf6mCpkDJmAHAU7zlisInOGbILg2/Xs70CHplzBuKs27kDyWuMOriLlfa76qGMOMHKfpwz4YcN3HqKZzKiCMlnUeNVgMT1b6lhrS/yEM9tIUf/nbuXH9qQuvaiVVG569neguyXIALrBaCxQvGxI8DF0XQc7r+7fGZ2zsNlbtbszPN7R3HXueQfefLf3kmuXkZKtz/4GQhsinUoqAzZIB9fPYapWcX0YstvkYv1U0HEP6d+HO7wfzzHwe/Fwt4ybhzAJBJmBjAUI7LznBzF3eSfxdHsCCaBiMquX4GoKcEPaXT/kKWpxehInXbE13ktZrFmGdwOpTkBYM+wEeJwDnKCpMILCjp8/GSoAEg9AisCzRY4quBIu3NyKumoi5U1RZ/FbReVjv38BdAWv6GAdsQZRlfmJ/Wu+c3czWLjyEzb/7Q9UoyLInPGxVlLRXFScTXWArMSjwyJuNIOGVVRetiQqWZJujQ6klvvqI3OOV0b3CyrWXuzrDG37ze+VsQOqqov60bdep1lu+T3QD72m4P5R+rgArePpZ5adkDHkIUTtZMuDVIPsOvrMc/HCxk4nlrim3GURZ3U3qUpDmgUZUlgXJ+XLC+vWfvNb8uh2mPEMD5PdAhFPVMXksPELPy4CLNTK7F999z2duB6Ah7LwXJYjiPXgzqq4DX2fI/gucaUWnWesXgvoAO1CfgZ1SCX9YCrRVju3zVmWae8ULCnHc+zwYNcZZ7d6AsuJP3TGFRT52eSwwkJRLGRqoHtNwBFQheyOx59sJqX9t9yuq5kMBVPBUVkCD6wKEN/KkRB/j16mFvz/R3DnOA7UCNyqyeFCNK9wwH4SNSdef7N/zukdeBywAqAHVgAd2Y/nQPHwZgcpTcw6RX3sCTq2Q6fabkk+KMlZwyAwcTiVU1SBkzUKbD0yHL38yg4nVuoA6KBGwaPChbLUVQ0Tp9NV9CYhe+/8tmhyQNNSbyJ81hVjHR14lJ/SnS+8tJxU9Fx2g8xNbH/h952kqKV67sQb76z52l0rXKUj9z0IM8A0gSWonZ9krFBXRSwYoqa0b1tkwfldrvp94XbKQ4hr9vqICWlDBod/xEgXp60sHhb3/+HpXKBiLFFGllENHmtBWKwPN0VKud6edVdeHwIP6K6IOfBccghPdyJ0fZ6aiCcQK2ra9PHLd/78KW37tnx1oiaqBNQ7b9oLh4ZJTS235J0Vc09sJ4V9SFIId9g+9xWxzySCfo+Tkoi/ChRkbtd2Kosb/vGXblITuexyVRMol9vwzHMDd9wZIQXx+WevJBXxSy4R9m6QTMrv3x5qnNXirmQ62iQ+CzMOOAgGAHIsdkFR8Vi3QKXRN5fsfP6lrJLBml5VMFQsEBSB1hXhSLhPIp4P6sOG9v8Ud6xAstG3qzY12+tzBg8cK1pUPbBn1/0PhElRyF2asE/PAif3kVo8JudALd9Oypa7KkOnXcR2RUB0gFnVshwRcyx8MDtZWVTj9v38l8uKA13EP4l71APCqBpPPROsHmkhhQPHnT36p5fWhqNAGorKdt9xZ6ezcsPjv4ifft5Sd8mON16PLjhzJSlafd8DQNyAIC/ktjzzh2Z/TZejPDT/bCm7CzeRJVXTRQ6rO7CMDA2JBhJFBX0kUgvJB9tICDCd8WSNLByWXuCahvhM6P8nJGPPHRAyh5qjafYLQtQSwSvzLISrRoGwR//8p5i3qtNRnCA2KziqAb2wrw53h5xBUChd7sqeuWfxra0CxbU5sHuAew54Fved4dMy+7fcdkeLE6t8QcZAOgVax6NWnmr7BCIOJvipwbMulJLhsXVrceRNg+7Z2DLvxBXOgndJ6dbvP8zvz+zrCje7ApGmU5SD48LGdanLroSBCV10zca7v7fSWb7mips48LIUsjojGRzFAaBY5asqsoJ1H5wMf2kAC8G8NiEYwEqrGm7WaeJUvZjn9GlAz4R+Ju5HmRlHwR1XasHXq1ibD/4c7oFheVSzup7paE3XndQJyttRGfPVJkkAkmp3QX3K2zToaugBzoA4rj+NW7IUwgqyg8FLBOwriCSIPg6A2Lth9eXXhklh0lUKo5SyuSWfYPP9ACDBRhyO6Hnn0a1rjMwYeuXVQ8nLbwQ33+z0hE/8hMIJ/JYthjq27qePhMHF3Xh9KDgPFM72R34MrsrS1J5Fn4DUv+evL2PnOkOyBY6dEjWYgmY+zEFlQoAjkxowjU0EGbK3jfvMXYsjBfiRcD/65DhsvyjUpRLyO0xKsJo5EVKbYsh6jmVwsR/c4LqRoUWXdDpKw65SiPRBUhVxgxTEE3T97oZQQaCVeJJzTsstXgI+JKviEBL42HwmB547S9XMluGhcy+OkELQQwkbd/vEPx76n+wHsIwUpL90K92zW8ENHXHDz59uJtWrb/nS4CevbXYXD977QOi4E5KLLtjzwkuR0y5sdlXETr9gf39CN4BNgEeUoVu/ttJT3Fo6n+0dQU0pq4zJawbIc/QjuiFj7THW0QnARWCsYRbjjNAPjztgcVjsjoT71B8+dtzhyneKkrG8QMzjbiqU4eyaFFnj9+5Ye8nnulzlYU8JHpUilS3egH3Cq2GA1LUVgJUtbGtYMPrKK5TisSG4bYJLuByDG4DU4PvSiTMuCDkK05AiHJV2Y4DauLPGviDeAzAYLQ7vhhtuNsf24PqLLFOW3doVg/vb9uKr7Y6SeGlgvL2jJTg7evaFE8l0e7ChvXy+ML7XUozMpqGesy9a6gtGTjsr5KqILLpKUyZwm18xGYoljDxIR035UIU+7ezER8D9Q//5hzZ94Xke1ztZBgjTMDR17/jG/7qt3VEU8QDEgX5SnSI1IU9N1FWXJA19vtoe4gsXzdr2y19Zck6DOczLBOvneDwAqFJT7E3HTz9/Ku755jt42AdVfCVcK1yedbd8XWVGDVwYlEBZGwfHTGpMDCWWeKuiJXO6jlskb9nMrd8N4bnxmWebPb7EDTdv+n9Pd1U2dJQ3bX75FbBmq+6+P9sT0yju4qsQ7aoE76WbWr5s77ApdCqVHx27o/DMvwt3hF7ABhGMhkW7xji/8et3tXtKo47yblIB4j3pwKYT6PadTXESGHCVdJDgxocf1TIH8EALJxEepSkHwQ+48z2pxGkfz+OO6wTOKrvXUV3MUW1bJ0gXFa2F3s3ff1DVFQuP4KHdp6otB1Vhibdm6Oob3qkoG7jyqyC6TZWhotB78adbSWWbsyJy8We09esl0Ly6boCaophcFfuob75kDvSMouozQQdWORbFcix65kOTwbHjjr0uGSYLd2xYICu33P9Ae2kwRrB+K0Gq7F5F1XFSk3LPipHKAVLU6Qxu/OEjxth+XBphBIInQAQs8NAsk0sk4qeeByKyx1WCbXEcwXybqW7bQ/W4q2AStPicax54RDYoiEhD5jkdT4UBNCBs06desOX2u6PX3tjp9u59522s+IT0vXFTW/W85aSY3bQObDXWiyksdqsROBAwol3WAbkUCB1Ey1TcJ6n8sLAeHfqjc87RR+IYX4yoMgyXEfGABuixrY/9uLOqDsxN2lUVIQFgiF43Vg5HST3AmCaFyxylqx74gTK628BTtdIh3PMtYLlYLHbSOXnc7egO5HEH44sdYDzVgHu7xz1030OyblmQADkQgriEiSfnOC59xRUtdccr40K0dEF3oJHdusXUIF+Km555qt1VN3DbdyFEcMvakOwSGIO3NCwFlHC71YRUgVlVm7ayeBTQ4TqWZgCTP5l//at65kivHPh8hoeol/FUJt325OOh6voEKQHVGHfV4jFXEuhxNbRByBY0riquXuoqW/PQD62Jg7hGLmqEt3EHWWoYBhuJxk/8GOCechbbvV8w3tPuesiu2H8H2xeVx4vLdz7+JBgciHeVxzI2SLCWCuDRNY/9LFY9V5AnMu2p5S7Sveh8XBUwFI0fHX3xdU4ZE6is6ygSQVDCDGOwgEy2z+9hcQDMGyzUew/x/MriUSL02HH/4Ok6fgbo/FHWKfN6ZuoFdwcXMIySw+MBKvbyojufeLQrAMRSlML2WXZ/NBKEvNpBajfNOmPz3JNaC6q2PvxjOnEQgMpiXlUgR7CIu6YzoXBs4dmTuNsNvA51mkLcHcBcFWF/+a5HHzWUDNA0FscgtUtYtgkcLZmitHeFr8lQmf7PfvHdosqN3/suLmkoWLtloGfQsMxR47F+ERKyrsKAgaASTISfBZ+kTFcsR0+kHwH3accHJ6+jLxJMwx1iIwMRl+NVTpXxcD/d+eCD4aKyqKMg6a4Jk0CvvQHS7qyOFc/bffKFqxac2FHesP2xx42DB7KadjCPO/gmwB3oNdfZ1X3CWeCbAPekG3tPwXzJN7jDll6OAEyiZnfp0J3f0IS9LDWzsoUlKrIIpplqsibxMGlAX+EawHg2XNbYd+H1kDCxiYah5uQJC7s7aJpuUvv8GBa66BKwDvxqiBxdlhSBnXbO/Ohs/qG4TyOZj4A7yD1QHlMv8D3YZ1dTrCyrsdiFGKJqx3fv7fIWRpwF2EKRVPU666Kg4j01vYGTNsw9K1RXP7zoXOb5P1NZ4CjN6BYBz6qaVkbH5hfiYH/8058OOYoH3dWhisIwKel3zYk6G7BlkascSCbkq29z+9KfvVbYtYYB3McFPYfdvPPlj+A5kSUk+1CPyLMHR8GUHul83tQ65A8F7kOvI6mOyb+dVoM381xvHlCIZVubYxVBjucg/cgSh2WdMDI8O5EdBVrmFZ3HkjUqjE9gw0xKhdzEptvu6vaWdbm8QMvd9hILRC1omP7yeWA2W5ylXXPO2Pi7Z5RVIwcNHiwrgckCcz8r2fNl09rez32u3Y19WrqItytY11Y7B6xXwlPV7QmEvIEOT3UH8fRf9Cl1VR/4rByHdUmy3YEBKUK3AYWsYeA2hcyyunaUdXPlGLvPHSP009DPT5qZuE+rg5yEns+3p33v3AGKMc4+mqTjAUSWZSnFHhQ5NjuW40SN8uCnM1k8yAF5kstt/tq3waxGnF48RY9OFVNjuzOYLpoNA9DqKP27qzL9w4eNjZsh3hleIZQBJY192AV44707R267faW7tMVRuOPsC/kHvrPp61+I1M+yT+pXJ/z1vc6aEPEOLDqfRrupZTCKzmkmliNoCHced3yogIG9X0AmTvOfk4uIk6tax9g15CNAPw33w3Z6nToDIMnjYbB8X2YIdF6QWV5jhQlWzsnqmMDnFF7EM0O4fprjZAYPJ3OAu2SB4eQ23X5nyF0cIwVd3sb2ijltpQ0Rb23MU5dA4xlMF9e3B5r6776H7tgG8W3IwDOSZnESzyLvgMpZf9e9zZ7yTm/Zhi9+SX3qJzvvvLmrrh77tDjru711EVIedhXG5pwqv7OM6jqvYH8YzO8o4hF32wHhIheMhKWph44rvo+1OIVSP9C9/hhb1/+rhHPYb85s+ognUlTZPjkPaVTEMnm4RNwLYzWakRXWkPDwJ89gnZ6owwXf10UR2z6ZQDTM+q9+vc1VkCAFPVUnZ++6d98d30zVLMCVc9AjPpCCFcud7o7PXC6s7cXKC1YhoqrJ+OAMLgvxzjFbH/hRZ1FtuqQ60nhGd9X8Nnd5M55squ51NKQdtUD0MWfJ8pImu8yVkxUDMEZOFPGcHK4a4kpWvrUinvEGM3yUnhTTSu+PHfejDMaH7njMbG59qOSfF2yOxO/gIruKS6vAPEAjTG6cKqy6b3tmyxadEeydeIPXLSD9nAbZkdKxAyOfv7nd6UuRglDhnD233bHjq7fFg/NStu/BVtGktIU4kp+9St+xxqIaBdwZTefAACjCBLUsRdn7y/+OVM3tLQ6k/Qsj3vlDZ356w5du7/3UZ9KNJ4EBS2Fdqm+Jv27wl7+WcxMAMMPiWh24Vgh5UITwp263VoQPouWf1HC4Js7Tym6n1kAfS7D/S38187kX+U2MaYkdgs9UNQ0/B25ACvYFdnrnupG1b76WffXvm377283/XAzcDJE6LrC4XScIOUPETZsN63svvaLD4e0lhV0FDZ1Vx4Uqm5LFjSMVC1KeWjxbDOHrKF77rW/T8b3YgYgzCS9rtn6XRg3ccWL/9kZ03ikhl7//susyz71Ed+6Qh/rWPfKDgfMviAea2lzBduKLzD9j/XPPAe7A6+P4j3EDDG6XEbABgvzeLkH+ITSHxWjakzGO8fWh62LHgvvkk3WmNgmcLPyfHH7dbm0EP3Pw7bde/cSFL5YH/tI4p//JX1FB4AxcQ1d4Wc5lMpZkGBaTSEYXge9xDzqQG6K20QEhnipp6i1s7PXWdJCSxf7grqefolj9QUXBIBIrS2xWVvgDIkwpqq/siJ9+3jLiWH7llfz6IcMyV//ub/ETPrGquL7PG4w7a5oLSld/+rP73v6nwmRArfOGjtvtOfvQLR7uxgpsiCncF2W5mbhPCur8airw28yG3v9R3I9U7Y7lVnYdHe5zsagPgWj2btneftX1L3tKlhP3P8tqhn76JIXca+FGAprVsdFxCrgbo61t7XNPCBP3sKs07g52e4IJR0WUlEe81XFfbcxR2eEsjZ/yMX7FW4bF8obKyRoZN1lJ5jSGtQTDAgu7Z0ffzx//W2194rSPZx790f67vxGdBcxe0OEpXEkcHQ4SP+mT7Qs/tu3RJ7RxtLxA8QweVjL+1YDNCgwIZFwPA0nMqQKHVlCRj9Zr/iOo+MOs307hmamDLegQwLhigj0iBBmfpJMZHVj81tKGhsUu7zvE/Y+SwKufvGxXWws1JEixGkTVBMtYFL7e/+TP24m7lXh6Cuck3cclSEPYOyvqbkqSYNxd3El8eLDih7+kEovHhLIZKkpEsI8nYnccFvvfwF+Y21Zln/nVtmuvHTrprA53+TKHI+JwtTr98arZqz728WTdie+W16/+8teMtetw81O1BE05FiE+E6Ysx9r7Z3ZOtneQ/ieC8hjXb6fmlakDjEocuB2GH8y3fezPErjxDet3/vbnixec8reqxvT37t2++J/c8BpudGyManwuK2JHQaod3D/whS+3EnfUVTjgnmObpgAe7HNhjWqvD5yQv7OsYc0fX6XwKw1FyjCQRQgnY69PwC4DqQUUCjX0net2PPrj9YvO6SoNgHtqdXnfLatJXnn9zptvH5h7arSo/J/EGbvgk1I4gkWspplTxKzCfAS8sNurxIoSA7pMUQ+1JJn2fJ5jxP3YiWWaXZochqxgsyLkpPyz0UTBRkmlB3f1/vQXoe89kBvqxebqAjZVPGDqWSaX3yzi+3ub557S6vSl3ZVDpCnhLEk5iqKechiAtDPQ58Zex/H5Z+2JDVLNxMKUnCSoBjFhsrPZcUOYwM6LuMZzsKV1yfxz4Y1anUUtnrLwxZes/+XP9j/45I6Tr+glFSlHYQfxJuedzr3yJvbpsCiXYRncdPwocYqFGBBqSr7blSR+4FDLERPvR0B8avI87Om9DIfdSrA9B0ShxAPXZ2SVNSAMVWbD5rFVIxqTxbM7OpVMNJwcL2ZAJZv8rhf+vMIf7HL6sf0OabCbn5clPFj2EscnCZRGPIHei69kxzNYKIPt5DUIVgLJVZd4wH1MURB3ix5IJlZcfuNbTkfv8Wcf+MmvpI7le554LDX/Y2F3A6p4UpZ2BLsr5m9/9Bd4OptScYzDitRjzofToEerzCv5E8so/A+H+/+w8OhDn0NjiwI8/mKvL2H1nIKiRd8PBkWnFq8CmwuqmGE5lgGPggvg+M90WWcP9H/la62QTkkRNvZ2gqWf3eNqSMLlqEv56lKkrM1ZNvzVr8gUe2TILPZryJgGyXBZUICMKmCzDAEr14XRPZv++Fzff31Bevv13Juvr/rsF2PVcyFFhGEAnU0pR1XaXd/iqk1c/fncqn6gGrB6h9WLR/E7U3FncrLE29XZ+KG5mTzzkXcnZhJ6/sGMh7XHAAeaVdWu0lEku1bfGFOwtgd0MiOyeFoejyZhs0LIpRBqQA5aX6r9hDPaXIVJUgxSvQ2sKTku7pnd7aiPklqQ8HFSstxZtuXJRxUIcDnLCzmwBRkV+F1gUU+InCmAHJSlDMetXrPuF79Jf+Hm4YuuHp591mpffdJZmXY2dBfOafYGhkh1r7MGHwtRO3fXb38LKt5Ax6x+ZCUOV/6EDC5FzSCWj7wxdNjFgKnPCJwW+KaqgOtmJIxroHmF4/AQJUQCo+QEeRy0Jc9pPB5FB/GusjnOwKf07H7iN60FNV2ekhRuZ9e0FQS6HdWdnmDMV5vwNYRL68KkpLWsMbP4FchhnJjNKbx9zkYmEGSCxI5LQPESxD+MtTaybvWDT0T8Vb2kJkawX3XIW2n3d6oLu4LDjqqktyrhKwXjOnDLl/dsXYudZmTjXw3G6UQvi3ZOO8y61b8F98k2QzMdcr7hE9Xw7NWEyOTgJjhezTGGLGiqoOa0HCNk7cNNVDRzvHSQz1Gsd1Ny+3ckL/5CiJTFiyvSnqpBEgwVBLqcRSsdnsGqpnUNCzvLa7tISWL2IiMZtvDEN8uaKoOl+wqxGUayG8nb6/qarDDZ/d3pdNPpMXcp9qt0VnT7CqOkBGg95gqknPUdpAbMWIK4V9Y27HvpddzpsFQ8bQWzDx83JeFxVXyaqXSUxy6AVpseyxLWN888qX4UxKc+vWd6/sTlQ4ljUaFCVGS1LNg6FR8JpAKHsPAhIS/igh2eE2INIb97d+jhq/apO+wNpKk6MzZOhZyqUEbSczlG48DKGhMylQ4M3nBLyFPT6SpLOCqjFXPiFU0AenNwQXvNKcPHnbfnxHM7S4qXerzbbvoKPbBVwGp/xd6qwjVbgsdHcH/RXsDisTYRrIy8d/+aq2+Cd+ly4nNJwsTbQYrwgTHeqiRpjLpmx51VfcTf7ildd8f39Q1bdEuG982/CapgAaF//zMc7gWWaRrudi3/+7vPM5+Bd4yhfaivK5Yvgv1EBpNAK8sMvDk/ruR4QZexOXmOGeNFbFihKiAhs5Mbp4dmg/2MRJvKGR6r2HSdQZcN9IJdQkQz29YSDizoJH6I6C5nIHbiKZGG44e+dov838/svuM72877zHBgbre7aGlB+b6nf6uqufxZwPdxh8/KcQxrL/mr4qEzg6Ygjv/uuWR1U6uzopNUtpfWhIOz467KbheI09mpgrkJV/WQuzJGfImFH+MXL8Xkqpscj6dq7QpCXKhRj3qmJd95eTr0gnSkRHrYpfPJJJx/iNLUFAq+JMcy+TcUeBb7E6hU4o0shAXDgj+H+YjSBdKbwGpcbnLv9NB7vvcATV0UUb0I8gS8jaVhOsRGAlb/TbfHSXHCV9LpKB1sOHn01lu2XvKZzBsvm6/9ffu37u4/8RyYB12ksOvUc/m+NBh7Hhuq2Bc+/A/8qsTjRJNxwwUrbyXN/gSC0tM3fPEVzcQfLq5fe9tdm75wey+g7/bj88HcdXG7VTr84lZv+ZaHHjZyByC7j4MFEkRsXSGJuMPHcbiO+mEK7xgt6GGfd3ok3LGBg8jlchmWBQHI2621saablTQ8TifgcQZNMQWOZ9mcCEFsd+Kd+isOPYJMlgzRMLPYl+2giU9RZLI509DE8bFw7YIeR3lXYXmrJ7C6YdGOT1259vQLdtx5b/L8Szob5q0swr9qdpVtuO9BjZ3QVMq/98rfPwFlKtsnBPM1f0BpYIEy1FD3H9z14592OopTTXONgQFxSUtP/SwIcNzstlt0YkW8J9hBChIXXJpbsQLEaU6XMxK2Y8RScQnbm/Kq/KFG5kigH9Y0TdP1054/O/U/8TnGEnYAxm1S+1mTwGxYu6JKWcMYx6eQ6TlFBuOC3U1ku1/8e8+kyT8kxX4/ReXAyvPwk6yugYsFQUINYd/Lb8RdpWCRgN9b3TWQ89oLamMljbHiBmySTAo73d6Ip7A9MDu3fKlEFdwNFaWpZSBksrgbcwn2jJE4uFns5iZL4e5U/UktgVpr3y5rbLz/nPN7SEncXw1s0+fGqii71rs0VFi79dZv6ls3qZbMYS8N7D2JYwnyRFWPVt8sHprLx+77Z/rYwz6ZEEZc5/BolKgJ9gO9FLs5nkAnxmn2AKU6Q+mEjA+A5agIqPITPJ47sR9Lk38u0OQAQIbIciwmCsgM44xIdW3T6p4Lr02Qgn4S7HPPjjgaevF0RyDpr41iC7bylKMg6va0k4LVV32Rbt/GUeXAjDocgvNOem/yaqoGPJ9hRVtW6Pv3rbvpnreKG/a9+RrVuF13fDfhrgPaihVifXacVIddtShyiD9ef9zu3/1Rm9gjU0O2WzXkn2/LH1nQ5HMJ5JVjLAGbuSkofvB5wFObRQHu4FGwD6OBrffhb3ELadv24d89v+u531vr1+ImNXYgz/Grhvan+/gDo3hq0H40UL4BzyT09mo7D5beAhmvaFpufNsTT7b5q3scpZDwekhdytE46KqLFwRCpDTmrEsV14SIp424mucu3Pnnv1JG0FWLN418DQhu29qd10n+oeOYAwUurykhUsAvmGjOMvuff6d19jnbvv1dyo4yT/6hxdvQTAqTFVjj2utq7HDVpX31/a7SFQ4SvfpzuZFemFMibx/bsM/YCdwRmV2boWcwzOXDgDu1/9dhdeTU1d3J7XKZkQ9yY1i0I/FKjqGGqfQPvXLF9b8tKGn79re3D/dZumANDPbd+3Dsx0+a4+O6YWHvZi7/q3DdIv/k21FNwBbPQJlY7kn5WLrjhHObvUUpElxZFog6KlLe2WFSligsi3gqk475I3iirHCkcd7uxx+VhXEK1HZAVrOCZh/x1mxZo+I68BEepov9kxWO7tg3csd96VOv2fqdB3ovu6a7pDrpKu131KVIU8Q3O+mZ1Ufquj3Vra7ilpLg+u/eZ21cZ1F82AVkak3EHcS8/cNBFVns9S1qVMBOkjATphHLoT5qAvIysLOK3X5k20lh90xGzOFhBCxj4SBe7Ae9CqoiTAJtdywCbW1qWEaiM4oGnn5CUSYEWchJIjWFfTtDt9z5otP9F39x9NLL99xxZ8epH3v9tHO3/XOxRWnOUtF8MAzH5uz2VoY6IYFp0sYPAlZjBp2gJj24a/0d32q22yz1kqoeV43dfSM47K0bxjNNlSl8kEbB4oYF+158jRmbyIHOM7CNxQFLyded5WvN4EWOpNVMAcgaAGPG25rT539+RUHDSndFwuFPuYr6wMT650Q99X14QLaxr2DOoLMalGzHnIW7n/q1wY1q1AIpA/MmKzAwnxQORxuGm5MOdc9h33vS+dQUmsedx+cFyXn2O3TKQhKwb5U9P0GSg16S7GIRyNtG/uHd7+/egcTTVex6jRWv+gSr8PKEIGVYTqc63b1t4Ct3veN0tfjL3q6seslX/IqjdN23v0ezGdWkME4qp1JOtXtG4qNFYMhBsqsMaD0tZ1rU0vf9+a/NdQv6i+oxq3lqIs7qmLcmbJ+4W+WsGcLD2pVLfGW9t3+dbtsCY5mBnMFgUULWVCYzav5FjnikAduLiiBRLGF86yO/XAyc5fBGC/09JZVrPXWDBY0wxfq9/7+6KwFvo77y/5FGl+VLsmXLsp2zTdJyHyGEBUqB5Wq3dKEsR1sKpS1byke7QFvK0gJpA9ku0JY9of36lVKullyO41u3rMNn7oQ4d0h8SJbmkGZGMxrNvjdyFMc5YHe/7e7qmy+fbCu29Ob93/u96/fcA0YPGHrw5iNmQPokcfHy8bV/AucKEWwuk0E/kUVaAdRcEWsLHHKNQfQozADkM3SAgoDxxjAKsoboDK+8yDPw+VHH4TcVwGbL8Bo4VQo3J/8llS64ASmRLSKozR4WMgUQupCZeOeNt5ed/zuKrKcMb1voP9B0l7Vu1ze/wxzcDeH7FOAvBv6qmOYAaGLToCByKazbIxMAuuKenuDy63tI1aC50W90dFlwLGBAX2nipZxxY2PC2jzgWTp06xdSfW2qlsUuvJzIMbzCcpI8d9cHOStmkDD5ia2ASi4Tiw0sXzlAOwaJdRMxwd/GbmFD1aBFr60YGgDDDpnr4sTSS0z+G2+GWK6gYsohn0Evi1kDrNfDGeBKfHq8Pml+ZrnnWI5P6ymHUh8FpmdR63NIfAYyBWwBARpcaG+y/KmR1MyOSFR8BRtMpuAva5J28ODWVavfvXz57w0V7RUVnYReZ6E2Vlo3EMPvKxu9zzyt5dOcVuQLCgRHx5kM/GaVhfPKg7FlVTWvKdxgNHTrHe0G57DFHSG1PlMdYIpBqnkraQXRB2m3l6731bSMXroyueZlLTvOaFi6AkTFKRLcO4Vn5zQlkrMBNRwByKTzEFxgVpz9cNXzfRYPLve98LK1i5auNTl7jfaQ0e4nFYHqljCNow4xmwsAfpvROnzHXWw8qoFicrmUJGSUPJMXSggHjIPMMSrLnk3ujJpixWmMJLksHHwpV+AFMNZKUs4BSMXDygjwfTgRDIvxwalNdyflDv8HPLxOx5jcsebVlzyfeMVY8S6xbCT2ToOtnVB/IqTDaFlLrG/XLY498YQi8YViHjDfNMQc4Dim+VwGh8YVVSrs2h65+yvrTc4ghZuFBmmc9oqSpgTVHKPcMXNz0NzUZ3Z1WV39TZ/c/tOX4DZxeiNuXi7AuYfPUup0R/oaceagn3UfZQYzcBx2UYNOFVVxy2DnVbf1Ll2hrXtzsvutgb+8rRuiA2tlkFT6TXUA6sPECcZu2NboI3SXrXbLg38rJ4aRjU3D+YKMblhwFpRlcsmUlmLOJnc+Py1KuJVE4nVKaqQsl2VwUJoKUoYToOQg3leQuxrsjD5LP7PwGBUqX5Z7hhMzcgFz5OOTyfbuxD+8GP3h4xuvu/HX7nm/N1VuJOa1FVUdF17sXXFd25U3BB59RD14UAVAp2DLODaK5bAZH1RHHo1vf+Dh7oqmXtx4j3nZhKEJSQiMoOMNvXRDwNIYoF1hi7uLVPYZarf+028x44vb6/StGfpKizTGZCeFDk/IOfjM0FBA6M8m07ygMeyhl37T/9nb5d73tdSO/d9+VKf6gMDVhdt8cc2OAwdKjI0BUy0A2M5az+5vfEeNhgHdwJtHkk29BQ4MLsTucPRmFmieNimKnc1YRRMzOgNXfnIqOTw6GQoXPjg0ObJzauwQNq5gbCkgOaWeJZ/F9Jovxz7TijKh5CclCBRAicFgHi9kx7W9H0y/+XqbZ8lbpCLy5Xsm1r+b3TrM7N8tMce08TS2ZnDohcAgCpqs8YwyMLL/69/YYK6JUnYIUIMG55B1gZ+4II4BBe8zYv06ZHThZICxfpO1dvs114p7D+LAF26xQ98PtlrJiVMyfBT9s+ufGu4BOVtJTMup8FLkaFTSAPtAFtqxidhzT8f/6o4df/NgwHNhv7UFB1xJQ9SM1GNeS92APqrsMzUOWRu64BQ7Gnc9+LB08AiAX9BbEDRWwMGUqvomn7PIPcsUp9nCeLaQkVRAYfmhrfGnnn//xttDj64O//Sfj0VHigUVMB+YHSQc5jLlALWk9OUQX9TXmghYBgUQDbLncxrylmgHBgLLVvgvuJJP9CKprqKwmgY+sJDXUnw+zUoKK6POFbPMQCzx7SfhWGOvAG0K05UhW3Mv1RSyzu+g6ztoXFs5YmwcJliT8JHqP7Z4cq+/iOsc4SxmRDavQLgEGlbksbMVfDVcIHdeT3OeVd8ZXT0ReHNcSZvS6fSRI0eiX7p/A2XdRBNwrbvIJwYMLTHSGDI0A6z0Ua6Q2RW11scNNcMEtzH3VNRHHniAC3oLmprSNAZNhAoQPsVmx8XUJJ9U+azGgSmUVQ4X9B0H5M3zyWxmKs9NiRDMy2o46P/s9QBC3jNagrd9XhvbrUDorAjT2emMkIb7KE5M56bSqo4sS5EqMmFL2N4InwHRFBjZvKyjFKTIVg8f+sNXH/L95CcauJ5iUWAh2oCY8JCSycArp1WVxe4tie9q3/K5L3gNdtx2bHT2m+rxol2lmd4YBKikMWZpwaWhllrwEx2G6h1ffTCf3gOOEVskdBRRAgWz9xCXPSg5B+9KyR6VVAnjbIDVLDO1aZ3/imt7SEXM2ug1uzFktS7sx93vnn6qsR9wjtEJV4SGWK62h6r5I3ibL96T6ezSCrKo5yxZlpfx94L7kABXgv0RhHRWSCalzLgqZ/m0JHI5mZ8UUqlj+0PPPPNadR34wLWEete9cMual5iJY7miApgS3lWyIBwY3TG2ZYfAcKWFJPjZ8NDoPH7YwI6pcxFjKJ1xE4cWmYMBX2rrgAiwQ1VyfFGbBsedYhVc9FYoKho7dfy9t/3X37LRUuun7EGDI1ySO+2KGBtOyt3gGjA2DFsaAsTWYbBv/+Jdss+rGzSJx7+cK+/gnr13uwx5z77XXBTKoSDmUbHYjx45rU3t/tffhF0X9xO7z+GKVSwYJq3eypYAcZbJmfrNbvA22K5GHH5ibzPWeq+6/ui//0YbHweFEwCYJyewAiFK6bwKalYE/5+eyrITENYjBRZYD4lPCenxfXsTr/xyw1989h3K/qbJ/N7yKzqe/MH4wAgmkYQ8AMqUmD+4Y8+h3XtxGkavnWIGGOCvvk4Eb4CuPjnd/iC8yWJ5QFYFUHRw+MmilpU0MCyqqkwjWbyi7tt55OcvBC66tJ1Yg8Q2asNVDvqFNAE40IuL7lHukYrGCOUIEvtmYktcfT2zaR0EVtMZZXZyTecm00Nufm6n/7n2a88uRZYdMbbKTE7uW/VK2DG/l9ARa8Mwaeiha8HnBE0NEdIQJ+6EscVvwAHMETiMNle/obabVHZ5lu3828d4r7fIJsFWQPAOlhesWaqISxBVTtZyoiowqqCygHZkGU4rrnROp5VAqPfmO7wP3Hus4/2jgzFhDBwGWAwFPpjMy2KaLe1OLDEbl2y9Pu1zci4MF2GzaHbAUWEsg9uz8gVRnRbUD3lpQpJYrQBelO0PbXvsMV/zggChRwxVw5b6BE7WlSTeWL5K3+ky2bvrm9uqmtvPv2LivT+A1ZJVbZzXZqyKnttBUh29NUvk5uadyLmLEuUyfKn0hZFgTtZEuXhw/4EfPh2qb91MqEF7wwCpTOBwdyPOdxN3zNBakvso8YRprJAM041xUtNtrOm8+PIda9aIO3doRdAuuaCgFQDNzSCDkZosFvhsXi+vFeCogmUQNVUT+QN/fP/DkTCuE9NUvS+d5bMZFZw9l0amcaWgqzYy4iIbabnRVX/D2IKJxR1ER0hqJqrw59KYBpK5ArgVDZcLHdj/4T++GLv18232uj5iHbY6h01OP75hZ0noOLFOkOVO/7IOS2+O5t0PPbRn1ep9b7yl5hk4x3wqm1a02ZhYJ5jD0RFZEGdz/J/Lvp+u9aVpqxwYQwijNYkfH5v68U/DdEM7MXmNtRDFAZSM43JYN/hYr05GFqfccUOT1+BCkGMD12/vJlSnc9HIzfck/T6GnQRBFsUi6C9IjC0IE4B28gh4AfxxoO1KfiKdAjivSTi+ppcHZLAo2MkKHlViAPqhWWdnPD8IGmmdAa7xXAmu5fQtiLgJjgGMmMOtlDheIENcg3EshBapI+zGjQce/LuQo7GbsvcSe78Z0YHPWA+m0l/RpDPBwDkuCV2ffgehU9WBeRek//RWEfCqqo/k8YI8nWXmrH3Tax0YaYtSeZ6rVHU6h33Pzqbs1pkB9SdCLpXn9NF6OT8+/sGLL2+64tpQ8wXBlsVdhpoYblJDiqZeQ72X1OMyEFIXNDd3wcEkNQlz/aipLkqqgqRqvbN12w9+xG3fWhCzKgR1Ki9JDLx9UVWQ8CfLwOEERDeVnMakpiYKmoLmIj0T+mX13WJsrlwpQyODex+RZ1IojWrg7IAsgcMFcYDV4nULUJSQQQPUUtu+S3h/7diPnoqsuKaHOAaJLWKoilgbo8gM2wAxkd/WEDDX6eR2jf1UE+7DNXnAu4YMNT7K2rHilsloCAxUVtNSYMThPepNRKWlOHqKSDo1phPLkPdccudz2H1XGpoWypeQLbAZwKTgg7JZLcOjYwKzyL/75o777ur1LIhT9QME82VwDgBWBkzuOIKtBoiqI3Rrn7nFW+UOVTt8JsMmQ0W3pS60/Jq9q9dkt44WFQGMviLwuGVJzhdVXMyeAgsvFeEH46JwvIgpDkUoYJY8nQGkCKohZ4s4Mi3nGY6dQV96WIC1dVB5fWCDUyQA6RLO9Rdx35PEHRjbtefNtTu//Hhk2TXrrc5OYkmYsJgDJjFE6sNU86B5IQSDXlLpM+v8R4hhPFG6JWYG0WO5zUvM+1f9SmMgtsvh6gV9GzhgVWzJEHXK8ZKJ02PUOfXIj5D7nFbC2ft25nyz9GTs2VVrK1vA1CTsjbjq2dQStLo7kX+oMUE1J+j5cdoT0ZlUINgLmef32OHFlkFi7HU42i6/cuvXHx9/+TUxGswlD+f44+LxAwUkq1NzqgZII61pnJabKjCMimEFywiskJ+WmOk81tIlTB9wAD/TEoQn+IlBu+G8Chr+CrmoqSpgchUi9+T20SMvr0nceWdP0zyvERCLKWiwzVRKjbgNK07N20rmjxAX2PeIoaLPaPPRpiHKNUzm95qbvJXOADH4nAuOPP08+JgSy/wslFIqEJ6hObDcIsjpj3PZ9zPKvVRemL2OonyCDvz+jfXnX76JmAKUNWqsCxAIo13RiuZ+U0vI4vaaHF6qNkZ5BgzzcXWsoSVscYctCHXAfXUZnW1U3Qabp/vC5du+8dC27z6y49HvHHjt1WzYVzh6QBMYLZ8rYjijIRezqsHR5vIai40wKqfi1ANmCAQFVI9L4opDBctlgJemtMlJbccHuQ5f9s0/Hv7xi97P3RV2ekJ0dRScJ7EPGx0xQ52+L9kdIa6gqTVkXQDS95lc/ZY6rCjY6sCjwpehioZ+kzNMKsONS8ee+ntlfB9mp8XcqWxEp8h9tujLMw7lloKPkPvsWzen/FbucCsBZy3HTr35Rvy669qI0U/MWyyehLW5i1THzfMAX4Lj9RudMco9SFoTxnlwZvtJLdweQEGDEIDQrn5S7TfYNtB0m9XWabd3Ebq7oal/5VVDD9y/8yc/3Pvi8/v+sDE1ul3WhCl5euLYIW0qreX06lIpBYC8FFhTK6jI0gBfMJHw0M9fGnn8h8P3PehdcW1o2aWB+kWbcZW9HQw0BndmTGZFTEjnCwFHFLwRcWH0RzfF7B74aZvVlbj+lj1ff6xzyXntFB0gplDrBWPP/zz/4WF4GyWfN9t2n8iGnmE+ttyX+bHw+5xmlTltuuV4qvSHU2AJ8kmu408Dt93aa3JESEUcNMXS3EHXd0IwTRpGac8IXR+nneCsOk11HaTKR+wJqhIkDtIfpdyjJlfYXNlLzFG6aoDYAsTcR8ybDNbNdAX8u9Y9L37fvfxbb2x99vm+v/7yvkee3PX03w+tfnbHk89tffLZnS+8NNXeXhzbWTi8V9i/Sz6+f/q51euXXvKmsWYdXbUe+90qIMxJmBvh6jd5/JTHR1oioAEgaOJAV29vjFW3AN4dJs5ttqZOUrFu8TJl0zsadxhi0S5i611+xe5fvy6nUkh3z2QQy/Js6dCfkG/+bHJHu3+ic+aj8fsZ5V5O15TLzSXRM6LKgaaBL/MHdn37W5ua3esI1WOqbK9whavnD9vmg3CjRkfAVO2HA2tx++oXjlxw2ZYVK9sdgHlqtxubh7EHFkFb1OSOWRrAyw0gE0XdKAFfXbvBQHoc7uO33n/ovsfHvvf0/u8/ufmCi9aRCp+tBe7uZltj1+JPxf7y5oEv3j58991HvvfdsZtu8zo9fcilAyirJkGcuL+RuJHYm6rvB9WmWmKWBUF9UUTEXNtFqjaQioChGnxs3FbbZ7SHLlpRXP9utu3t6J33RO++f7JjMzJXaBpu7hJzLJvBCSH9uJ9QwVInSPaMu4nKcj9rvelsncpz5D7bqeKcuaodZQvTiiaqefnQ1qnf/nLophs2EXvfvPP3XLhyi/sToN0ADBLW1gBx4kinvfXwQw8rb78x+rWvtllqgiBBk8tbsQBMPwAhfE7jsHK/aR4IyEc3ex2OvotWTLzyej4+wvf3H331F5GbPzdw2dUDS5b6rXB0jCFi8aJemwGftFG2Hnutn66KG2rgkI1SDcOUZ9gwP0q1+qzwy3FVRr8ZJ3r9pMJLLCFsYG/ptDYB3ApX1AZp6yAAearJd9410ZW3Rn+2+uCeLeCYwX6xOQnzqQI2moFFKKWtTnQz5E8st5jbSThHiT+W3M/IYjd7BLT0U1nkNBZz58dzTK6oYN/Elj1jr/xuz5oXj69ateXW28Fc+nFhcjMur7TU+khl5IZbxPfeSr/wYqBpMbYSGh2ANQdN80DlAQthF7mhsc/UFCUN8AQw0rZ779e2DmbD/uF7Hoi0Xjh09U3sP/1KfOKx0JKl3ZQNd/gQWz9VFbPUh8wAByuDxpqgwRmlXEMGz7BpfswEt9zlN7UAukXOAFIDV8zelFh0fuLSlVOPPp9+ds226z/XQVX0EjpmdIASdFx509Ff/EY9dgw8+bSI9LRFXR5YuYQ4Ausa0mxe4tlyP4f9+Gi5n85hUTpWJTA0O4HDKZjekvgMK3AypzIZdaKgZgCSS5MaN5H2dvU/+GB703xQrpjOK9RP2dvdLXu/9fCRbz3W6/pUl06lCxYGQEWY1A/SjQPEOULALtXG4PgbbZ3EGrhk+YFHHoletbKbGCKE9nvmHfzK17dfc1O4fnE/qQe0N2TEmQiIFUIEZyW8lvo+e7Pf2IypC2MTTpZS4EuaojjaiymjQMPiD+77ZnbDRu344WIxW0gfHn3iyffNtRuMtuHLVxxf9Rz/wUBeUyVVK4iqvhOUE4vYiJGTtNIK9tkzUycab4RzEyB+VD7yTNP8p2+UO4lteIRy+rpqVm+Nw+0h00IuXSyyCq8xKfnw/vS//Hrngks2EeK3WbsI1VdVP7x0+dgVN+9ZdnWiblHQAgja4Te16ouinNh9b67FGQdTY8DQ3GVo9hkcnYRqg/9OVQ2SujCp3lhlD5EqPS+IVGp6XOOZoU83YQESzNQg1bwT72WNnrmrC1rqfaTCT0y9xNDnaNr58CN8OJw/Nn78nX/f/ch3YxfdlLj0r/f96GV+YBtycOkj26cq9Rnw3sece579+GgcOedx+jfLtfwTmUu92VgP27DXJYdzyZqIewzZg/sPr1rT++kLUPSmik6DrdtWN+j5xL5FF+1rOW+oan4fhdFgyKATelO49C5GWuGKk9YBc0vM2BigHD5DXcDYGDJB8FXfY7T2GqvCdtegaxHcuV66oZvUBkwNuISE4M0IVC0aXnLlliWX+WhwIdYI7dhOeeKkPmZogCi6lzj9Va39zUv6Gha8Y1+8fslVQ996gu3u01jwU3lc0CArc+ZDTnd4f1a5l87LKegeOzRK7fp6maVMEyVBdJkVGYnFmFMTjhw98Ppru+66r8vRtJmu3gzxKmUOVtWGalwBTCM3JwBc4qpHd5C0+sg8H/EEKUwBDpPqQbppwLhgxLgwYWwJ0C5AhAB1NgD2cLXuPO+K3eetDDoX94ClsnpCFg8EPnAUYgs+ffAr30hcd4seOdcOmhf6DJ4eY6NONl3XTmztxIoxkWfRri99L/Nvb6kH92c1LgXBSAEb3SD0Pxtrzf+U3D/mHOIsYov8CQ+AaKpEXwQ3Y7IgTYoSnwLIO83nRYhr8gxf2LM3+f47u7//A+/FV7ZZHe0IQmxB4hg1tWJPjrkOwha/2e0z6aV6Yy14Sx9t8dGOPgxt3EPW+ihdCRBzhJ4H8WSEbtrm/NRu1wV6XsUzRM0bJvOCZgdEAHtWXJP/1av999671lwFr/fbFkAYEaWcfmIFpBh2L9x27W3HfvwC09WtHR3XeE7VZNzUkMVuPdwgohTOge7+O4//itznSHzmIeRnWrz19vETNVyJyUlcTpYxVzfNctNZPs8jqSQmTIqpqWwkcuwXr26/+2u+ZZesr25YZ6vxmmq8BruPmMPEnKCrBk3OuBEzgj2V1RCOYdxrAnNBIoSAk/TZF2Lenzj1fcueiLUJ7E8YLFLFgmBVU8hQtf/q65VfvBy96/YNNIkSCmDPWkIgcBtaeMmuLz0w9cvXcqGYMjmJ1DualpTFpD73gusv9bVN+h7F/5EH+fgvne2OT6dJw1myGZZqzFKB3JGXRpIK2HiFOWh993Auy0ocK6YYPp+UCiLuhy+IvDZ+RI1Hkr/91z3PPRm/8Y7QJdf2uRdCzAXeL0SsYTDZVJ2fOONU/RZzA+J0isSrHf0QKxGX11Tlt9R4rTU+W22w0uUz1/ZSNeBRfeZqAPWxquZtV9zQN39ZJ6GjtppQ8yL/F+7Y/dQzxzZvYsaP6N3YALqkZIEDYM7JBaYgp5HXkZMF1CpWzP3fkvvpgYC+4bZk4zi89DQR2Bk1C1aGYXkGJ+kFBSkOsWQIX+tjLEjgKfN53FypZdPa9BHt6JQUGz78+u+GHv1e8MZbuj55XpujYb3Zvp5y++uXhOuWttlaEp/5/MT3n9p+0+ch0O0iFX2Gml6qslt/EqDrAP9AdNZhdfRVtQRaL/ZddEP85nu33//woWd+dvSfX5vs8PO79qI/0oog5WmdiwXC7EJGyKY5luX1ncSYZczwXEbO/rnlfkYEeUqj9qyRIqFUV9H9aknuJUo67GAB/yTCB+CyEm6mwen/XAZp3SU2nZ1K8yndIxTzgibktUxe5otCTpNlTcG9oWMfZDdvOP7Sz/b/3cMjX/vm+OoXDnz/mfA9j06u92q51K5XV/ubmqLzLhr45GWxT18WPv+yxJWf2XnLF/fd+eV9d3710GM/SL7yWr4tkO4OSzv2FKamZC6TzaS0VDLHpgH1FrkCrhThCwVOKXAyq497IZUhwGDswcQmWonj/vf1/dyji6V8f/kq9UbxMwjn5CBredBkpkYx01ky0+ePwKfkGJAgUZaLKuZ48xgEsslpJcPnPpxKHT5WgGhMEo7v3bcvnBjr7D3Q6z8Sjo+PbE19MMYc/pCfnOJSKVEpSAX470X9KsCvKl2z3+Ts68/8IP9NoZ/EkSea/0pXCc+Um3A+ptxxOdiJ7p2shFaotGoLKbdzyD0lFRSwuVgLlPX93Vley/GakNWknKZIuB0K1w4VQNC431TKn7jEk9esNzn7+n8m97IVOl3u5daPjyN3/XUod+QTxGolP3PwkbMPnQT4umSWnVLFZAHnYxmGwSpaEY0YxMr6RG5uVs1eKI1XlNu4y9f/V7mfg47wjD+a88FONjicInehLPeSjWL0wjTqeE4s8AKAIuwyZJmUhGOPSO7IYH9Ehp8Z39Edu6AzPkoFHq/STEvpmq0Nuf8bj/+03M/I6Ht6YDWLBfljyn1mthNELLNZ7LLLzmSb4ZUc2BNexNEFfdBAFfMFJpuHYJLBiWdWxNW9nN6KihgWXsQKs+Ve9jF/fr0+2+M/ANZQlnG46g6MAAAAAElFTkSuQmCC"/>
+                                    </div>
+                                    <div id="SealPercent"></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <!--TextInfoContent end-->
+                    </div>
+                    <!--TextInfoCon end-->
+                </div>
+                <!--TextInfo end-->
+                <div class="Recommend">
+                    <div class="TextTitle" style="width:112px;">推荐服务</div>
+                    <div class="ReportResult_T"></div>
+                    <div class="ReportResult_Con recommend_list">
+                        <a class="recommend_row recommend_width" href="http://www.paperge.com/check-pay/reduce-pay-task/G202406101146088830" target="_blank">
+                            <div class="recommend_left">
+                                <img class="img1" src="images/recommend_icon1.png"/>
+                            </div>
+                            <p class="recommend_right">自动降重</p>
+                        </a>
+                         <a class="recommend_row recommend_width" href="http://www.paperge.com/online_check/prepare_check/11ca4c04-76e5-4100-bbb6-33763d48bf76" target="_blank">
+                            <div class="recommend_left">
+                                <img class="img2" src="images/recommend_icon2.png"/>
+                            </div>
+                            <p class="recommend_right">在线修改</p>
+                        </a>
+                         <a class="recommend_row recommend_width" href="http://www.paperge.com/paper-correction/check?taskId=11ca4c04-76e5-4100-bbb6-33763d48bf76" target="_blank">
+                            <div class="recommend_left">
+                                <img class="img4" src="images/recommend_icon4.png"/>
+                            </div>
+                            <p class="recommend_right">论文纠错</p>
+                        </a>
+                         <a class="recommend_row recommend_width" href="https://www.ixueshu.com/" target="_blank">
+                            <div class="recommend_left">
+                                <img class="img5" src="images/recommend_icon5.png"/>
+                            </div>
+                            <p class="recommend_right">找论文</p>
+                        </a>
+                        <a class="recommend_row recommend_width" href="../../resource/降重秘籍.pdf" target="_blank">
+                            <div class="recommend_left">
+                                <img class="img1" src="images/recommend_icon1.png">
+                            </div>
+                            <p class="recommend_right">降重秘籍</p>
+                        </a>
+                        <a class="recommend_row recommend_width" href="https://www.ixiezuo.com/promote/HNSQQPAN" target="_blank">
+                            <div class="recommend_left">
+                                <img src="images/recommend_ixiezuo.png">
+                            </div>
+                            <p class="recommend_right">写论文</p>
+                        </a>
+                        <a class="recommend_row recommend_width" href="https://paperge.chatyy.org/" target="_blank">
+                            <div class="recommend_left" style="background:#fff">
+                                <img src="images/recommend_chatyy.png">
+                            </div>
+                            <p class="recommend_right">GPT-4</p>
+                        </a>
+                    </div>
+                    <div class="ReportResult_Bot"></div>
+                </div>
+                <div>
+                    <!--<div class="banner_0508"><a href="http://www.paperge.com/reduce_repetition.aspx?reportnum=G202406101146088830" target="_blank"></a></div>-->
+                <a href="http://www.paperge.com/NoLoginPost.aspx?edition=4&v=chec" target="_blank"><div class="banner_0509 banner_0510">
+            <p class="estimate2">恭喜您！只差一次PaperGe <i>至尊版查重</i></p>
+        </div></a>
+                </div>
+                <!--ReportResult-->
+                <!-- 至尊版还是以前展示的内容，其它版本做调整 -->
+                    <div class="ReportResult Mar">
+                        <div class="TextTitle" style="width:129px;">检测报告结果</div>
+                        <div class="ReportResult_T"></div>
+                        <div class="ReportResult_Con">
+                            <!--ReportResult_Con1-->
+                            <div class="ReportResult_Con1_new">
+                                <ul>
+                                    <li>
+                                        <span class="color-red">总文字复制比：1.8%</span>
+                                    </li>
+                                    <li>
+                                        <span>去除引用文献复制比：</span><span class="color-red">1.8%</span>
+                                    </li>
+                                    <li>
+                                        <span>去除本人已发表文献复制比：</span><span class="color-red"> 1.8%</span>
+                                    </li>
+                                    <li>
+                                        <span>重复字数：</span>263
+                                    </li>
+                                    <li>
+                                        <span>总字数：</span>14,923
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--ReportResult_Con1 end-->
+                        </div>
+                        <div class="ReportResult_Bot"></div>
+                    </div>
+
+                <!--ReportResult end-->
+                <!--DetailReport-->
+                <div class="DetailReport Mar">
+                    <!--tab begin-->
+                    <div class="notice">
+                        <div class="repTabLink_0426">
+                                <ul>
+                                            <li><a href="简洁报告.html" target="_blank">简洁报告</a></li>
+                                            <li class="curr">全文对照报告</li>
+                                            <li><a href="去除本人已发表文献报告.html" target="_blank">去除本人已发表文献报告</a></li>
+                                            <li><a href="全文标明引文报告.html" target="_blank">全文标明引文报告</a></li>
+                                </ul>
+                        </div>
+                        <div class="tab-bd">
+                            <div class="repTip_04261800">检测原文内容中<span class="red">红色字体</span>标记的为重复文字</div>
+                            <div class="tab-pal">
+                                <ul>
+                                        <!--summary-->
+                                        <div class="summary">
+                                            <dl>
+                                                <dt>
+                                                    <span class="sumInfo">1.Term paper_第1部分</span>
+                                                    <span class="sumTotal">总字数：7,258</span>
+                                                </dt>
+                                                <dd>
+                                                    文字复制比：3.6%（263）
+                                                </dd>
+                                            </dl>
+                                                <!--detail_table-->
+                                                <div class="detail_table">
+                                                    <table bordercolor="#fff" cellspacing="0" cellpadding="0"
+                                                           class="detail_tableText">
+                                                            <!--content1-->
+                                                            <tr>
+                                                                <td class="Origin_text">
+                                                                    <div class="Sim1">
+                                                                        <strong class="add_title1">原文：</strong>
+                                                                        <span class="listNu">1</span>
+                                                                        <p id="text_0"> various<em class='similar'> machine learning algo-rithms, including Support Vector Regression (SVR) and De-cision Tree </em>Regression, were employed to construct predic-tive models.</p>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="fenge"></td>
+                                                                <td class="Si_text">
+                                                                        <div class="add_tabBox">
+                                                                            <div class="hd">
+                                                                                <ul>
+                                                                                    <li>相似源</li>
+                                                                                    <li>修改建议</li>
+                                                                                    <li class="auton_jc" data-id='0'>自动降重</li>
+                                                                                </ul>
+                                                                                 <img class="autoJC_fire" src="images/autoJc_icon1.png"/>
+                                                                            </div>
+                                                                            <div class="bd">
+                                                                                <div class="siminfo">
+                                                                                    <p>
+                                                                                        在本地库和互联网共找出相似内容：
+                                                                                        <span class="Si_title">1个</span>
+                                                                                    </p>
+                                                                                        <p>1
+                                                                                            、 Different<em class='similar'> machine 024 learning methods were explored, including lin-025 ear regression, support vector regression and de-026 cision tree. </em>The best result is obtained by</p>
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <span class="text_title">篇名：</span>《中国电子产业研究所
+                                                                                                》
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <span class="text_title">作者：</span>
+                                                                                                <span class="text_title">来源：</span>网页
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                </div>
+                                                                                    <div class="correct_advice">
+                                                                                                <div class="corrAdv_content">
+                                                                                                    <div class="corrAdv_l">
+                                                                                                        重复词：
+                                                                                                    </div>
+                                                                                                    <div class="corrAdv_r">
+                                                                                                            <span>
+                                                                                                                machine
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、learning
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、algo
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、rithms
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、including
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、support
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、vector
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、regression
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、svr
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、cision
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、tree
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、employed
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、construct
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、predic
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、tive
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、models
+                                                                                                            </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                 <div class="autoJC" id="autoJC_0">
+                                                                                    <div class="autoJC_ing">
+                                                                                        <img src="images/autoJc_icon2.png"/>
+                                                                                        <p class="autoJC_p1">正在努力帮您修改</p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_aft">
+                                                                                        <p class="autoJC_p3"><b>降重后</b></p>
+                                                                                        <p class="autoJC_p3 jc_after_text"></p>
+                                                                                        <p class="autoJC_p2"><a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>第3代智能降重引擎，能在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_no">
+                                                                                        <img src="images/autoJc_icon3.png"/>
+                                                                                        <p class="autoJC_p4"></p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clear"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <!--content1-->
+                                                            <tr>
+                                                                <td class="Origin_text">
+                                                                    <div class="Sim1">
+                                                                        <strong class="add_title1">原文：</strong>
+                                                                        <span class="listNu">2</span>
+                                                                        <p id="text_1"> and Jian Zhang proposed ahybrid<em class='similar'> model combining Convolutional Neural Networks(CNN) and Long Short-Term Memory </em>(LSTM) networksfor road visibility estimation [6]. The CNN extracts spatialfeatures from images,</p>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="fenge"></td>
+                                                                <td class="Si_text">
+                                                                        <div class="add_tabBox">
+                                                                            <div class="hd">
+                                                                                <ul>
+                                                                                    <li>相似源</li>
+                                                                                    <li>修改建议</li>
+                                                                                    <li class="auton_jc" data-id='1'>自动降重</li>
+                                                                                </ul>
+                                                                                 <img class="autoJC_fire" src="images/autoJc_icon1.png"/>
+                                                                            </div>
+                                                                            <div class="bd">
+                                                                                <div class="siminfo">
+                                                                                    <p>
+                                                                                        在本地库和互联网共找出相似内容：
+                                                                                        <span class="Si_title">1个</span>
+                                                                                    </p>
+                                                                                        <p>1
+                                                                                            、 click through rate prediction<em class='similar'> model basedon CNN(Convolutional Neural Networks)-LSTM(Long Short Term Memory</em>)hybrid network. This model us</p>
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <span class="text_title">篇名：</span>《基于卷积-LSTM网络的广告点击率预测模型研究
+                                                                                                》
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <span class="text_title">作者：</span>厍向阳；王邵鹏
+                                                                                                <span class="text_title">来源：</span>计算机工程与应用
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                </div>
+                                                                                    <div class="correct_advice">
+                                                                                                <div class="corrAdv_content">
+                                                                                                    <div class="corrAdv_l">
+                                                                                                        重复词：
+                                                                                                    </div>
+                                                                                                    <div class="corrAdv_r">
+                                                                                                            <span>
+                                                                                                                jian
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、zhang
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、proposed
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、ahybrid
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、combining
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、convolutional
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、neural
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、networks
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、cnn
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、long
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、short
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、term
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、memory
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、lstm
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、networksfor
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、road
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、visibility
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、estimation
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、extracts
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、spatialfeatures
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、images
+                                                                                                            </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                 <div class="autoJC" id="autoJC_1">
+                                                                                    <div class="autoJC_ing">
+                                                                                        <img src="images/autoJc_icon2.png"/>
+                                                                                        <p class="autoJC_p1">正在努力帮您修改</p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_aft">
+                                                                                        <p class="autoJC_p3"><b>降重后</b></p>
+                                                                                        <p class="autoJC_p3 jc_after_text"></p>
+                                                                                        <p class="autoJC_p2"><a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>第3代智能降重引擎，能在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_no">
+                                                                                        <img src="images/autoJc_icon3.png"/>
+                                                                                        <p class="autoJC_p4"></p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clear"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <!--content1-->
+                                                            <tr>
+                                                                <td class="Origin_text">
+                                                                    <div class="Sim1">
+                                                                        <strong class="add_title1">原文：</strong>
+                                                                        <span class="listNu">3</span>
+                                                                        <p id="text_2">SVM) tofunction as a regression estimator. The main principle be-hind SVR<em class='similar'> is to identify a hyperplane in a high-dimensionalspace that has the </em>maximum margin with respect to thetraining data.</p>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="fenge"></td>
+                                                                <td class="Si_text">
+                                                                        <div class="add_tabBox">
+                                                                            <div class="hd">
+                                                                                <ul>
+                                                                                    <li>相似源</li>
+                                                                                    <li>修改建议</li>
+                                                                                    <li class="auton_jc" data-id='2'>自动降重</li>
+                                                                                </ul>
+                                                                                 <img class="autoJC_fire" src="images/autoJc_icon1.png"/>
+                                                                            </div>
+                                                                            <div class="bd">
+                                                                                <div class="siminfo">
+                                                                                    <p>
+                                                                                        在本地库和互联网共找出相似内容：
+                                                                                        <span class="Si_title">1个</span>
+                                                                                    </p>
+                                                                                        <p>1
+                                                                                            、t’s number. The aim of the SVM<em class='similar'> is to identify a maximum- margin hyperplane that divides the </em>points into different physiolo</p>
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <span class="text_title">篇名：</span>《BritishJ
+                                                                                                》
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <span class="text_title">作者：</span>
+                                                                                                <span class="text_title">来源：</span>网页
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                </div>
+                                                                                    <div class="correct_advice">
+                                                                                                <div class="corrAdv_content">
+                                                                                                    <div class="corrAdv_l">
+                                                                                                        重复词：
+                                                                                                    </div>
+                                                                                                    <div class="corrAdv_r">
+                                                                                                            <span>
+                                                                                                                svm
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、tofunction
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、regression
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、estimator
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、main
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、principle
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、hind
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、svr
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、identify
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、hyperplane
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、dimensionalspace
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、maximum
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、margin
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、respect
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、thetraining
+                                                                                                            </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                 <div class="autoJC" id="autoJC_2">
+                                                                                    <div class="autoJC_ing">
+                                                                                        <img src="images/autoJc_icon2.png"/>
+                                                                                        <p class="autoJC_p1">正在努力帮您修改</p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_aft">
+                                                                                        <p class="autoJC_p3"><b>降重后</b></p>
+                                                                                        <p class="autoJC_p3 jc_after_text"></p>
+                                                                                        <p class="autoJC_p2"><a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>第3代智能降重引擎，能在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_no">
+                                                                                        <img src="images/autoJc_icon3.png"/>
+                                                                                        <p class="autoJC_p4"></p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clear"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <!--content1-->
+                                                            <tr>
+                                                                <td class="Origin_text">
+                                                                    <div class="Sim1">
+                                                                        <strong class="add_title1">原文：</strong>
+                                                                        <span class="listNu">4</span>
+                                                                        <p id="text_3"> SVR uses a kernel function to map the in-put data into a higher-dimensional space in order to find ahyperplane that can separate the data points. The most com-monly used kernel functions in SVR are the<em class='similar'> linear kernel,polynomial kernel, and radial basis function (RBF) </em>kernel.</p>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="fenge"></td>
+                                                                <td class="Si_text">
+                                                                        <div class="add_tabBox">
+                                                                            <div class="hd">
+                                                                                <ul>
+                                                                                    <li>相似源</li>
+                                                                                    <li>修改建议</li>
+                                                                                    <li class="auton_jc" data-id='3'>自动降重</li>
+                                                                                </ul>
+                                                                                 <img class="autoJC_fire" src="images/autoJc_icon1.png"/>
+                                                                            </div>
+                                                                            <div class="bd">
+                                                                                <div class="siminfo">
+                                                                                    <p>
+                                                                                        在本地库和互联网共找出相似内容：
+                                                                                        <span class="Si_title">1个</span>
+                                                                                    </p>
+                                                                                        <p>1
+                                                                                            、d based on kernel functions of<em class='similar'> linear kernel, polynomial kernel, radial basis function (RBF) </em>and Sigmoid in this paper. The</p>
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <span class="text_title">篇名：</span>《AvailabA
+                                                                                                》
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <span class="text_title">作者：</span>
+                                                                                                <span class="text_title">来源：</span>网页
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                </div>
+                                                                                    <div class="correct_advice">
+                                                                                                <div class="corrAdv_content">
+                                                                                                    <div class="corrAdv_l">
+                                                                                                        重复词：
+                                                                                                    </div>
+                                                                                                    <div class="corrAdv_r">
+                                                                                                            <span>
+                                                                                                                svr
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、kernel
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、function
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、map
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、put
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、higher
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、dimensional
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、space
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、order
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、find
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、ahyperplane
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、separate
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、points
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、monly
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、functions
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、linear
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、polynomial
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、radial
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、basis
+                                                                                                            </span>
+                                                                                                            <span>
+                                                                                                                、rbf
+                                                                                                            </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                 <div class="autoJC" id="autoJC_3">
+                                                                                    <div class="autoJC_ing">
+                                                                                        <img src="images/autoJc_icon2.png"/>
+                                                                                        <p class="autoJC_p1">正在努力帮您修改</p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_aft">
+                                                                                        <p class="autoJC_p3"><b>降重后</b></p>
+                                                                                        <p class="autoJC_p3 jc_after_text"></p>
+                                                                                        <p class="autoJC_p2"><a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>第3代智能降重引擎，能在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                    <div class="autoJC_no">
+                                                                                        <img src="images/autoJc_icon3.png"/>
+                                                                                        <p class="autoJC_p4"></p>
+                                                                                        <a href="javascript:void(0);" onClick="goJC('exp_reduce')">体验完整版降重</a>
+                                                                                        <p class="autoJC_p2">第3代智能降重引擎，能够在保障句子通顺的情况下，有效降低语句重复率。</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clear"></div>
+                                                                </td>
+                                                            </tr>
+                                                        <!--content1 end-->
+                                                    </table>
+                                                    <script type="text/javascript">
+                                                        $(".add_tabBox").slide({
+                                                            defaultIndex: 0,
+                                                            delayTime: 0,
+                                                            trigger: "click"
+                                                        });
+                                                        $('.auton_jc').click(function(){
+                                                            var id=$(this).attr('data-id');
+                                                            var sentence=$('#text_'+id).text();
+                                                            if(sentence.length>400){
+                                                                sentence=sentence.substr(0,400);
+                                                            }
+                                                            if($('#autoJC_'+id+' .autoJC_ing').css('display')!='none'){
+                                                                $.ajax({
+                                                                    url:'http://www.paperge.com/api/v1/reduce/reduce-sentence/11ca4c04-76e5-4100-bbb6-33763d48bf76',
+                                                                    data:{sentence:sentence},
+                                                                    dataType:"json",
+                                                                    type:'POST',
+                                                                    success:function(res){
+                                                                        if(res.code==0){
+                                                                            $('#autoJC_'+id+' .jc_after_text').text(res.data);
+                                                                            $('#autoJC_'+id+' .autoJC_aft').show();
+                                                                            $('#autoJC_'+id+' .autoJC_ing').hide();
+                                                                            $('#autoJC_'+id+' .autoJC_no').hide();
+                                                                        }else if(res.code==-2004){
+                                                                            $('#autoJC_'+id+' .autoJC_p4').text(res.msg)
+                                                                            $('#autoJC_'+id+' .autoJC_no').show();
+                                                                            $('#autoJC_'+id+' .autoJC_ing').hide();
+                                                                            $('#autoJC_'+id+' .autoJC_aft').hide();
+                                                                        }
+                                                                    },
+                                                                    error:function(){
+
+                                                                    }
+                                                                })
+                                                            }
+
+                                                        })
+                                                    </script>
+                                                </div>
+                                                <!--detail_table end-->
+                                        </div>
+                                        <!--summary-->
+                                        <div class="summary">
+                                            <dl>
+                                                <dt>
+                                                    <span class="sumInfo">2.Term paper_第2部分</span>
+                                                    <span class="sumTotal">总字数：7,085</span>
+                                                </dt>
+                                                <dd>
+                                                    文字复制比：0%（0）
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <!--summary-->
+                                        <div class="summary">
+                                            <dl>
+                                                <dt>
+                                                    <span class="sumInfo">3.Term paper_第3部分</span>
+                                                    <span class="sumTotal">总字数：580</span>
+                                                </dt>
+                                                <dd>
+                                                    文字复制比：0%（0）
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    <!--summary end-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--tab end-->
+                </div>
+                <!--DetailReport end-->
+            </div>
+            <div class="wrapper_con_Bottom"></div>
+        </div>
+        <!--wrapper_con end-->
+    </div>
+    <!--wrapper_topbg end-->
+    <div class="copyright">版权所有 <a href="http://www.paperge.com" target="_blank">paperge.com</a>
+    </div>
+</div>
+<script>
+    var currentKey = '';
+    var TSetForS = '';
+    var SSetForT = '';
+
+    function highlightSetter(key, fade){
+      let arr;
+      if(key[0] === 'T'){
+        arr = SSetForT[key];
+      } else {
+        arr = TSetForS[key];
+      }
+      let newArr;
+      try{
+        newArr = [...arr, key];
+      }catch(e){
+		console.log(e);
+        console.log(TSetForS);
+        console.log(SSetForT);
+      }
+      colorSetter(newArr,fade);
+    }
+
+    function colorSetter(arr, fade){
+      arr.forEach(v => {
+        let results = document.getElementsByClassName('similar ' + v);
+        if(results.length > 0){
+          if(fade){
+            results[0].className = results[0].className.replace('highlight2 ','');
+          } else {
+            results[0].className = 'similar highlight2 ' + v;
+          }
+        }
+      })
+    }
+
+    window.onload = function(){
+		try {
+		  TSetForS = JSON.parse(TSetForS.replace(/◑/g,'"'))
+		  SSetForT = JSON.parse(SSetForT.replace(/◑/g,'"'))
+		} catch (e){
+			console.log(e);
+			console.log(TSetForS)
+			console.log(SSetForT)
+		}
+	}
+</script>
+<!--wrapper end-->
+</body>
+</html>

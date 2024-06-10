@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 2 */
+        .paper-section {
+            margin: 0 15px 30px;
+        }
+
+        .paper-txt,
+        .paper-footer {
+            color: #343544;
+            font-size: 14px;
+            line-height: 22px;
+            background: #fff;
+        }
+
+        .P30 {
+            padding: 20px;
+        }
+
+        .font-bold,
+        .strong {
+            font-weight: bold !important;
+        }
+
+        .MB10 {
+            margin-bottom: 10px;
+        }
+
+        .notice-diamond.red {
+            background: #e95252;
+        }
+
+        .notice-diamond {
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            display: inline-block;
+            background: transparent;
+            vertical-align: middle;
+            border-radius: 50%;
+        }
+
+        .notice-diamond.orange {
+            background: #f06541;
+        }
+
+        .notice-diamond.black {
+            background: #000000;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        .notice-list-group {
+            font-size: 14px;
+            color: #343544;
+        }
+
+        .g-font-color.orange {
+            color: #f39800;
+        }
+
+        .MR5 {
+            margin-right: 5px;
+        }
+
+        .MT15 {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="paper-txt P30 paper-section" style="padding-right:0px">
+        <h4 class="MB10 font-bold">句子的不同颜色表示不同的相似度</h4>
+        <ul class="notice-list-group">
+            <li>
+                <span class="notice-diamond red"></span>
+                <span class="g-font-color red MR5">红色</span>
+                相似度70%以上（重度相似，请全面修改）
+            </li>
+            <li>
+                <span class="notice-diamond orange"></span>
+                <span class="g-font-color orange MR5">橙色</span>
+                相似度40%-70%（轻度相似，请酌情修改）
+            </li>
+            <li>
+                <span class="notice-diamond black"></span>
+                <span class="g-font-color black MR5">黑色</span>
+                合格
+            </li>
+        </ul>
+        <p class="MT15">
+            如果要查看句子详细检测结果<br>
+            请点击论文中“红色”和“橙色”标记的部分
+        </p>
+    </div>
+</body>
+</html>
