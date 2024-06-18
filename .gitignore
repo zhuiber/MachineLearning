@@ -2,3 +2,9 @@
 *.pdf
 *.docx
 *.doc
+
+# git rm -r --cached 文华班
+
+# git rm -r --cached '*.pdf' '*.docx' '*.doc'
+
+
