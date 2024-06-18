@@ -1,0 +1,406 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>experiment_2</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-03-23"><meta name="DC.source" content="experiment_2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Initialize the parameters for signal</span>
+Fs = 4000;
+Fc = 1000;
+t = 0:1/Fs:0.2;
+DC = 2;
+<span class="comment">% Generate the original signal m(t) and plot it</span>
+m_t = cos(2*pi*10*t);
+figure(1)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(311)
+plot(t, m_t, <span class="string">'linewidth'</span>, 0.5)
+ylim([-1.5,1.5])
+title(<span class="string">'The original signal m(t) in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+
+<span class="comment">% AM modulation by built-function and by our own then plot it</span>
+m_t_am1 = ammod(m_t+DC, Fc, Fs);
+m_t_am2 = (m_t+DC) .* cos(2*pi*Fc*t);
+subplot(312)
+plot(t, m_t_am2, <span class="string">'linewidth'</span>, 0.5)
+<span class="comment">% Plot the envelop of the AM modulation signal</span>
+[up,low] = envelope(m_t_am2);
+hold <span class="string">on</span>
+plot(t, up, t, low, <span class="string">'linewidth'</span>, 0.5)
+title(<span class="string">'The modulation signal by AM in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+<span class="comment">% AM demodulation by envelop detector</span>
+m_t_am_de  = hilbert(m_t_am2);
+subplot(313)
+plot(t, abs(m_t_am_de)-DC, <span class="string">'linewidth'</span>, 0.5)
+ylim([-1.5,1.5])
+title(<span class="string">'The demodulation signal by AM in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+<span class="comment">% Plot original signal m(t) in frequency domain</span>
+m_t_w = fft(m_t);
+n = length(m_t);
+fshift = (-n/2:n/2-1)*(Fs/n);
+m_t_w_shift = fftshift(m_t_w);
+figure(2)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(311)
+plot(fshift, abs(m_t_w_shift), <span class="string">'linewidth'</span>, 0.5)
+xlim([-100, 100])
+title(<span class="string">'The original signal m(t) in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+<span class="comment">% Plot AM modulation signal in frequency domain</span>
+m_t_am2_w = fft(m_t_am2);
+m_t_am2_w_shift = fftshift(m_t_am2_w);
+subplot(312)
+plot(fshift, abs(m_t_am2_w_shift), <span class="string">'linewidth'</span>, 0.5)
+xlim([-2000, 2000])
+title(<span class="string">'The modulation signal by AM in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+<span class="comment">% Plot AM demodulation signal in frequency domain</span>
+m_t_am_de_w = fft(abs(m_t_am_de)-DC);
+m_t_am_de_w_shift = fftshift(m_t_am_de_w);
+subplot(313)
+plot(fshift, abs(m_t_am_de_w_shift), <span class="string">'linewidth'</span>, 0.5)
+xlim([-100, 100])
+ylim([0, 500])
+title(<span class="string">'The demodulation signal by AM in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+
+<span class="comment">% DSB modulation</span>
+m_t_dsb = m_t .* cos(2*pi*Fc*t);
+<span class="comment">% Plot the original signal m(t) in time domain</span>
+figure(3)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(311)
+plot(t, m_t, <span class="string">'linewidth'</span>, 0.5)
+ylim([-1,1])
+title(<span class="string">'The original signal m(t) in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+<span class="comment">% Plot the DSB modulation signal in time domain</span>
+subplot(312)
+plot(t, m_t_dsb, <span class="string">'linewidth'</span>, 0.5)
+title(<span class="string">'The modulation signal by DSB in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+<span class="comment">% Plot the envelop of the DSB modulation signal</span>
+[up,low] = envelope(m_t_dsb);
+hold <span class="string">on</span>
+plot(t, up, t, low, <span class="string">'linewidth'</span>, 0.5)
+<span class="comment">% DSB demodulation by our own then plot it</span>
+m_t_dsb_de = m_t_dsb .* cos(2*pi*Fc*t);
+cutoff_frequency = 2*10;
+order = 26;
+b = fir1(order, cutoff_frequency/(Fs/2));
+m_t_dsb_de = 2*filter(b, 1, m_t_dsb_de); <span class="comment">% Low pass filter</span>
+subplot(313)
+plot(t, m_t_dsb_de, <span class="string">'linewidth'</span>, 0.5)
+ylim([-1,1])
+title(<span class="string">'The demodulation signal by DSB in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+<span class="comment">% Plot the original signal in frequency domain</span>
+figure(4)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(311)
+plot(fshift, abs(m_t_w_shift), <span class="string">'linewidth'</span>, 0.5)
+xlim([-100, 100])
+title(<span class="string">'The original signal m(t) in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+<span class="comment">% Plot the DSB modulation signal in frequency domain</span>
+m_t_dsb_w = fft(m_t_dsb);
+m_t_dsb_w_shift = fftshift(m_t_dsb_w);
+subplot(312)
+plot(fshift, abs(m_t_dsb_w_shift), <span class="string">'linewidth'</span>, 0.5)
+xlim([-2000, 2000])
+title(<span class="string">'The modulation signal by DSB in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+<span class="comment">% Plot the DSB demodulation signal in frequency domain</span>
+m_t_dsb_de_w = fft(m_t_dsb_de);
+m_t_dsb_de_w_shift = fftshift(m_t_dsb_de_w);
+subplot(313)
+plot(fshift, abs(m_t_dsb_de_w_shift), <span class="string">'linewidth'</span>, 0.5)
+xlim([-100, 100])
+ylim([0, 500])
+title(<span class="string">'The demodulation signal by DSB in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+
+<span class="comment">% PM modulation</span>
+Kp = 10; <span class="comment">% Determine the coefficient</span>
+Sp_t = cos(2*pi*Fc*t + Kp.*m_t);
+<span class="comment">% Plot the original signal in time domain</span>
+figure(5)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(211)
+plot(t, m_t, <span class="string">'linewidth'</span>, 0.5)
+ylim([-1,1])
+title(<span class="string">'The original signal m(t) in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+<span class="comment">% Plot the PM modulation signal in time domain</span>
+subplot(212)
+plot(t, Sp_t, <span class="string">'linewidth'</span>, 0.5)
+title(<span class="string">'The PM modulation signal in time domain'</span>)
+xlabel(<span class="string">'t'</span>)
+ylabel(<span class="string">'Amplitude'</span>)
+<span class="comment">% Plot the original signal in frequency domain</span>
+figure(6)
+set(gcf,<span class="string">'position'</span>, [250 200 1000 800]);
+subplot(211)
+plot(fshift, abs(m_t_w_shift), <span class="string">'linewidth'</span>, 0.5)
+xlim([-100, 100])
+title(<span class="string">'The original signal m(t) in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+<span class="comment">% Plot the PM modulation signal in frequency domain</span>
+Sp_t_w = fft(Sp_t);
+Sp_t_w_shift = fftshift(Sp_t_w);
+subplot(212)
+plot(fshift, abs(Sp_t_w_shift))
+title(<span class="string">'The PM modulation signal in frequency domain'</span>)
+xlabel(<span class="string">'Frequency (Hz)'</span>);
+ylabel(<span class="string">'Magnitude'</span>);
+</pre><img vspace="5" hspace="5" src="experiment_2_01.png" alt=""> <img vspace="5" hspace="5" src="experiment_2_02.png" alt=""> <img vspace="5" hspace="5" src="experiment_2_03.png" alt=""> <img vspace="5" hspace="5" src="experiment_2_04.png" alt=""> <img vspace="5" hspace="5" src="experiment_2_05.png" alt=""> <img vspace="5" hspace="5" src="experiment_2_06.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Initialize the parameters for signal
+Fs = 4000;
+Fc = 1000;
+t = 0:1/Fs:0.2;
+DC = 2;
+% Generate the original signal m(t) and plot it
+m_t = cos(2*pi*10*t);
+figure(1)
+set(gcf,'position', [250 200 1000 800]);
+subplot(311)
+plot(t, m_t, 'linewidth', 0.5)
+ylim([-1.5,1.5])
+title('The original signal m(t) in time domain')
+xlabel('t')
+ylabel('Amplitude')
+
+% AM modulation by built-function and by our own then plot it 
+m_t_am1 = ammod(m_t+DC, Fc, Fs);
+m_t_am2 = (m_t+DC) .* cos(2*pi*Fc*t);
+subplot(312)
+plot(t, m_t_am2, 'linewidth', 0.5)
+% Plot the envelop of the AM modulation signal
+[up,low] = envelope(m_t_am2);
+hold on
+plot(t, up, t, low, 'linewidth', 0.5)
+title('The modulation signal by AM in time domain')
+xlabel('t')
+ylabel('Amplitude')
+% AM demodulation by envelop detector
+m_t_am_de  = hilbert(m_t_am2);
+subplot(313)
+plot(t, abs(m_t_am_de)-DC, 'linewidth', 0.5)
+ylim([-1.5,1.5])
+title('The demodulation signal by AM in time domain')
+xlabel('t')
+ylabel('Amplitude')
+% Plot original signal m(t) in frequency domain 
+m_t_w = fft(m_t);
+n = length(m_t);
+fshift = (-n/2:n/2-1)*(Fs/n);
+m_t_w_shift = fftshift(m_t_w);
+figure(2)
+set(gcf,'position', [250 200 1000 800]);
+subplot(311)
+plot(fshift, abs(m_t_w_shift), 'linewidth', 0.5)
+xlim([-100, 100])
+title('The original signal m(t) in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+% Plot AM modulation signal in frequency domain 
+m_t_am2_w = fft(m_t_am2);
+m_t_am2_w_shift = fftshift(m_t_am2_w);
+subplot(312)
+plot(fshift, abs(m_t_am2_w_shift), 'linewidth', 0.5)
+xlim([-2000, 2000])
+title('The modulation signal by AM in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+% Plot AM demodulation signal in frequency domain 
+m_t_am_de_w = fft(abs(m_t_am_de)-DC);
+m_t_am_de_w_shift = fftshift(m_t_am_de_w);
+subplot(313)
+plot(fshift, abs(m_t_am_de_w_shift), 'linewidth', 0.5)
+xlim([-100, 100])
+ylim([0, 500])
+title('The demodulation signal by AM in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+
+% DSB modulation  
+m_t_dsb = m_t .* cos(2*pi*Fc*t);
+% Plot the original signal m(t) in time domain 
+figure(3)
+set(gcf,'position', [250 200 1000 800]);
+subplot(311)
+plot(t, m_t, 'linewidth', 0.5)
+ylim([-1,1])
+title('The original signal m(t) in time domain')
+xlabel('t')
+ylabel('Amplitude')
+% Plot the DSB modulation signal in time domain 
+subplot(312)
+plot(t, m_t_dsb, 'linewidth', 0.5)
+title('The modulation signal by DSB in time domain')
+xlabel('t')
+ylabel('Amplitude')
+% Plot the envelop of the DSB modulation signal
+[up,low] = envelope(m_t_dsb);
+hold on
+plot(t, up, t, low, 'linewidth', 0.5)
+% DSB demodulation by our own then plot it
+m_t_dsb_de = m_t_dsb .* cos(2*pi*Fc*t);
+cutoff_frequency = 2*10;
+order = 26;
+b = fir1(order, cutoff_frequency/(Fs/2));
+m_t_dsb_de = 2*filter(b, 1, m_t_dsb_de); % Low pass filter
+subplot(313)
+plot(t, m_t_dsb_de, 'linewidth', 0.5)
+ylim([-1,1])
+title('The demodulation signal by DSB in time domain')
+xlabel('t')
+ylabel('Amplitude')
+% Plot the original signal in frequency domain
+figure(4)
+set(gcf,'position', [250 200 1000 800]);
+subplot(311)
+plot(fshift, abs(m_t_w_shift), 'linewidth', 0.5)
+xlim([-100, 100])
+title('The original signal m(t) in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+% Plot the DSB modulation signal in frequency domain
+m_t_dsb_w = fft(m_t_dsb);
+m_t_dsb_w_shift = fftshift(m_t_dsb_w);
+subplot(312)
+plot(fshift, abs(m_t_dsb_w_shift), 'linewidth', 0.5)
+xlim([-2000, 2000])
+title('The modulation signal by DSB in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+% Plot the DSB demodulation signal in frequency domain
+m_t_dsb_de_w = fft(m_t_dsb_de);
+m_t_dsb_de_w_shift = fftshift(m_t_dsb_de_w);
+subplot(313)
+plot(fshift, abs(m_t_dsb_de_w_shift), 'linewidth', 0.5)
+xlim([-100, 100])
+ylim([0, 500])
+title('The demodulation signal by DSB in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+
+% PM modulation 
+Kp = 10; % Determine the coefficient
+Sp_t = cos(2*pi*Fc*t + Kp.*m_t);
+% Plot the original signal in time domain
+figure(5)
+set(gcf,'position', [250 200 1000 800]);
+subplot(211)
+plot(t, m_t, 'linewidth', 0.5)
+ylim([-1,1])
+title('The original signal m(t) in time domain')
+xlabel('t')
+ylabel('Amplitude')
+% Plot the PM modulation signal in time domain
+subplot(212)
+plot(t, Sp_t, 'linewidth', 0.5)
+title('The PM modulation signal in time domain')
+xlabel('t')
+ylabel('Amplitude')
+% Plot the original signal in frequency domain
+figure(6)
+set(gcf,'position', [250 200 1000 800]);
+subplot(211)
+plot(fshift, abs(m_t_w_shift), 'linewidth', 0.5)
+xlim([-100, 100])
+title('The original signal m(t) in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+% Plot the PM modulation signal in frequency domain
+Sp_t_w = fft(Sp_t);
+Sp_t_w_shift = fftshift(Sp_t_w);
+subplot(212)
+plot(fshift, abs(Sp_t_w_shift))
+title('The PM modulation signal in frequency domain')
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+
+##### SOURCE END #####
+--></body></html>
